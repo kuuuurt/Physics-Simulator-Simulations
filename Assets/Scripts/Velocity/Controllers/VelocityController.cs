@@ -24,7 +24,7 @@ public class VelocityController : VelocityElement{
 					//show results here
 					app.view.HUD.buttonStop.gameObject.SetActive (false);
 					app.view.results.gameObject.SetActive(true);
-					app.view.results.velocityText.text = string.Format("{0:0.00}", app.view.HUD.velocitySlider.value) + " m / s";
+					app.view.results.velocityText.text = string.Format("{0:0.00}", app.model.targetDistance / app.model.time) + " m / s";
 					app.view.results.distanceText.text = string.Format("{0:0.00}", app.model.targetDistance) + " m";
 					app.view.results.timeText.text = string.Format("{0:0.00}", app.model.time) + " s";
 					simulate = false;
@@ -38,6 +38,7 @@ public class VelocityController : VelocityElement{
 		app.model.distance = 0f;
 		app.model.time = 0f;
 		simulate = false;
+		app.view.HUD.buttonStop.gameObject.SetActive (false);
 		app.view.startScreen.targetDistance.text = "";
 		app.view.startScreen.gameObject.SetActive (true);
 	}
@@ -59,6 +60,7 @@ public class VelocityController : VelocityElement{
 	}
 
 	public void startTutorial(){
+		reset ();
 		simulate = false;
 		tutorialOngoing = true;
 		app.model.velocity = 0;
