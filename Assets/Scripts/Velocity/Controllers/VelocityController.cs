@@ -34,6 +34,7 @@ public class VelocityController : VelocityElement{
 	}
 
 	public void reset(){
+		app.view.results.gameObject.SetActive(false);
 		app.model.velocity = 0f;
 		app.model.distance = 0f;
 		app.model.time = 0f;
