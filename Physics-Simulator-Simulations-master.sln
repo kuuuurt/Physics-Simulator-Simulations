@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{9DBECE5A-E987-3C7C-D426-2A1FBE39ECDC}") = "Physics-Simulator-Simulations-master", "Assembly-CSharp.csproj", "{59CCF25E-9562-40F9-19EA-8133D50B9B10}"
+EndProject
+Project("{9DBECE5A-E987-3C7C-D426-2A1FBE39ECDC}") = "Physics-Simulator-Simulations-master", "Assembly-UnityScript-firstpass.unityproj", "{AB788963-473F-20F2-830F-AB7075DBCEA1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{59CCF25E-9562-40F9-19EA-8133D50B9B10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59CCF25E-9562-40F9-19EA-8133D50B9B10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59CCF25E-9562-40F9-19EA-8133D50B9B10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59CCF25E-9562-40F9-19EA-8133D50B9B10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB788963-473F-20F2-830F-AB7075DBCEA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB788963-473F-20F2-830F-AB7075DBCEA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB788963-473F-20F2-830F-AB7075DBCEA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB788963-473F-20F2-830F-AB7075DBCEA1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
