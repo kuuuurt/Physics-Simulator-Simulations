@@ -5,29 +5,43 @@ using System;
 
 public class AccelerationController : AccelerationElement{
 
-	private bool simulate;
-	private bool tutorialOngoing;
+
 
 	void Start(){
 		startTutorial ();
 	}
 
 	void Update(){
-		if (!tutorialOngoing) {
-			if (simulate) {
+		if (!app.model.tutorialOngoing) {
+			if (app.model.simulate) {
 				if (app.model.distance < app.model.targetDistance) {
-					app.model.velocity = app.view.HUD.velocitySlider.value;
+					app.model.accelerationRate = app.view.HUD.accelerationSlider.value;
+					app.model.brakeRate = app.view.HUD.brakeSlider.value;
 					app.model.distance = app.view.car.transform.position.z - app.model.startPos;
 					app.model.time = Time.time - app.model.startTime;
+					if (app.model.accelerate) {
+						app.model.velocity += Time.deltaTime * app.model.accelerationRate;
+						if (app.model.velocity > app.model.maxSpeed) {
+							app.model.velocity = app.model.maxSpeed;
+							app.model.accelerate = false;
+						}
+						Debug.Log ("Acceleration : " + app.model.velocity / app.model.time);
+					} else if (app.model.brake) {
+						app.model.velocity -= Time.deltaTime * app.model.accelerationRate;
+						if (app.model.velocity < 0) {
+							app.model.velocity = 0;
+							app.model.brake = false;
+						}
+					}
 				} else {
-					app.model.velocity = 0f;
-					//show results here
 					app.view.HUD.buttonStop.gameObject.SetActive (false);
 					app.view.results.gameObject.SetActive(true);
-					app.view.results.velocityText.text = string.Format("{0:0.00}", app.model.targetDistance / app.model.time) + " m / s";
+					app.view.results.accelerationText.text = string.Format("{0:0.00}", app.model.targetDistance / app.model.velocity) + " m / s2";
 					app.view.results.distanceText.text = string.Format("{0:0.00}", app.model.targetDistance) + " m";
 					app.view.results.timeText.text = string.Format("{0:0.00}", app.model.time) + " s";
-					simulate = false;
+
+					app.model.velocity = 0f;
+					app.model.simulate = false;
 				}
 			}
 		}
@@ -38,14 +52,14 @@ public class AccelerationController : AccelerationElement{
 		app.model.velocity = 0f;
 		app.model.distance = 0f;
 		app.model.time = 0f;
-		simulate = false;
+		app.model.simulate = false;
 		app.view.HUD.buttonStop.gameObject.SetActive (false);
 		app.view.startScreen.targetDistance.text = "";
 		app.view.startScreen.gameObject.SetActive (true);
 	}
 
 	public void startSimulation(){		
-		simulate = true;
+		app.model.simulate = true;
 
 		app.view.HUD.buttonStop.gameObject.SetActive (true);
 		app.model.startPos = app.view.car.transform.position.z;
@@ -62,8 +76,8 @@ public class AccelerationController : AccelerationElement{
 
 	public void startTutorial(){
 		reset ();
-		simulate = false;
-		tutorialOngoing = true;
+		app.model.simulate = false;
+		app.model.tutorialOngoing = true;
 		app.model.velocity = 0;
 		int i = 1;
 		while (true) {
@@ -79,7 +93,7 @@ public class AccelerationController : AccelerationElement{
 	public void validateTargetDistance(Button btnDone){
 		try{
 			app.model.targetDistance = float.Parse(app.view.startScreen.targetDistance.text);
-			if(tutorialOngoing){
+			if(app.model.tutorialOngoing){
 				btnDone.interactable = true;
 			}
 			app.view.startScreen.buttonStart.interactable = true;
@@ -91,7 +105,7 @@ public class AccelerationController : AccelerationElement{
 	}
 
 	public void stopTutorial(){
-		tutorialOngoing = false;
+		app.model.tutorialOngoing = false;
 		int i = 0;
 		while (true) {
 			try{
@@ -101,7 +115,28 @@ public class AccelerationController : AccelerationElement{
 			}
 		}
 	}
+		
 
+	public void accelerateCar(){
+		app.model.accelerate = true;
+		app.model.startAccelerate = Time.time;
+		app.model.brake = false;
+	}
+
+	public void stopAcceleration(){
+		app.model.accelerate = false;
+	}
+
+	public void brakeCar(){
+		app.model.brake = true;
+		app.model.startAccelerate = Time.time;
+		app.model.accelerate = false;
+	}
+
+	public void stopBraking(){
+		app.model.brake = false;
+
+	}
 }
 
 

@@ -15,11 +15,14 @@ public class AccelerationView : AccelerationElement {
 
 	void Update() {
 		//bind data to UI
-		app.view.HUD.velocityText.text = string.Format("{0:0.00}", app.view.HUD.velocitySlider.value) + "m / s";
-		app.view.HUD.distanceText.text = string.Format("{0:0.00}", app.model.distance) + "m";
-		app.view.HUD.timeText.text = string.Format("{0:0.00}", app.model.time) + "s";
+		app.view.HUD.velocityText.text = string.Format("{0:0.00}", app.model.velocity) + " m / s";
+		app.view.HUD.distanceText.text = string.Format("{0:0.00}", app.model.distance) + " m";
+		app.view.HUD.timeText.text = string.Format("{0:0.00}", app.model.time) + " s";
 
 		app.view.HUD.distanceSlider.value = app.model.distance;
+
+		app.view.HUD.accelerationSliderText.text = string.Format("{0:0.00}", app.view.HUD.accelerationSlider.value) + " m / s2";
+		app.view.HUD.brakeSliderText.text =string.Format("{0:0.00}",  app.view.HUD.brakeSlider.value) + " m / s2";
 	}
 
 }

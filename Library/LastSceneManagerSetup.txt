@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Acceleration.unity
+- path: Assets/Scenes/Velocity.unity
   isLoaded: 1
   isActive: 1

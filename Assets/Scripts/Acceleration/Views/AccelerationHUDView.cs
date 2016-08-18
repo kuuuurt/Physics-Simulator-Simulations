@@ -7,9 +7,12 @@ public class AccelerationHUDView : AccelerationElement{
 	public Text distanceText;
 	public Text velocityText;
 	public Text timeText;
+	public Text accelerationSliderText;
+	public Text brakeSliderText;
 
 	public Slider distanceSlider;
-	public Slider velocitySlider;
+	public Slider accelerationSlider;
+	public Slider brakeSlider;
 
 	public Button buttonStop;
 }

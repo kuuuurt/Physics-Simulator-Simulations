@@ -4,7 +4,7 @@ using System.Collections;
 
 public class AccelerationResultsView : AccelerationElement{
 
-	public Text velocityText;
+	public Text accelerationText;
 	public Text distanceText;
 	public Text timeText;
 }
