@@ -13,6 +13,7 @@ public class AccelerationModel : AccelerationElement {
 
 	public bool simulate;
 	public bool tutorialOngoing;
+	public bool dontSetVelocity;
 
 	public float startAccelerate;
 
@@ -25,5 +26,7 @@ public class AccelerationModel : AccelerationElement {
 
 	public float startPos;
 	public float endPos;
+
+
 
 }

@@ -27,7 +27,7 @@ public class AccelerationController : AccelerationElement{
 						}
 						Debug.Log ("Acceleration : " + app.model.velocity / app.model.time);
 					} else if (app.model.brake) {
-						app.model.velocity -= Time.deltaTime * app.model.accelerationRate;
+						app.model.velocity -= Time.deltaTime * app.model.brakeRate;
 						if (app.model.velocity < 0) {
 							app.model.velocity = 0;
 							app.model.brake = false;
@@ -40,6 +40,7 @@ public class AccelerationController : AccelerationElement{
 					app.view.results.distanceText.text = string.Format("{0:0.00}", app.model.targetDistance) + " m";
 					app.view.results.timeText.text = string.Format("{0:0.00}", app.model.time) + " s";
 
+					app.model.dontSetVelocity = true;
 					app.model.velocity = 0f;
 					app.model.simulate = false;
 				}
@@ -49,6 +50,7 @@ public class AccelerationController : AccelerationElement{
 
 	public void reset(){
 		app.view.results.gameObject.SetActive(false);
+		app.model.dontSetVelocity = false;
 		app.model.velocity = 0f;
 		app.model.distance = 0f;
 		app.model.time = 0f;

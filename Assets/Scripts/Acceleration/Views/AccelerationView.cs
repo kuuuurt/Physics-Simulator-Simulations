@@ -15,7 +15,8 @@ public class AccelerationView : AccelerationElement {
 
 	void Update() {
 		//bind data to UI
-		app.view.HUD.velocityText.text = string.Format("{0:0.00}", app.model.velocity) + " m / s";
+		if(!app.model.dontSetVelocity)
+			app.view.HUD.velocityText.text = string.Format("{0:0.00}", app.model.velocity) + " m / s";
 		app.view.HUD.distanceText.text = string.Format("{0:0.00}", app.model.distance) + " m";
 		app.view.HUD.timeText.text = string.Format("{0:0.00}", app.model.time) + " s";
 
