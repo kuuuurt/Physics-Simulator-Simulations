@@ -114,9 +114,11 @@
      <Compile Include="Assets\Scripts\Power\Models\PowerModel.cs" />
      <Compile Include="Assets\Scripts\Power\PowerApplication.cs" />
      <Compile Include="Assets\Scripts\Power\Views\PowerView.cs" />
+     <Compile Include="Assets\Scripts\Projectile Motion\Components\PlatformRotator.cs" />
      <Compile Include="Assets\Scripts\Projectile Motion\Controllers\ProjectileMotionController.cs" />
      <Compile Include="Assets\Scripts\Projectile Motion\Models\ProjectileMotionModel.cs" />
      <Compile Include="Assets\Scripts\Projectile Motion\ProjectileMotionApplication.cs" />
+     <Compile Include="Assets\Scripts\Projectile Motion\Views\CannonView.cs" />
      <Compile Include="Assets\Scripts\Projectile Motion\Views\ProjectileMotionView.cs" />
      <Compile Include="Assets\Scripts\Rotational Motion\Controllers\RotationalMotionController.cs" />
      <Compile Include="Assets\Scripts\Rotational Motion\Models\RotationalMotionModel.cs" />
