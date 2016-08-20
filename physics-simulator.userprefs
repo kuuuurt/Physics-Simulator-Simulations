@@ -4,12 +4,9 @@
     <Files>
       <File FileName="Assets/Scripts/Velocity/Controllers/VelocityController.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Centripetal and Centrifugal Forces/Models/CentripetalAndCentrifugalForcesModel.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Projectile Motion/Controllers/ProjectileMotionController.cs" Line="24" Column="56" />
+      <File FileName="Assets/Scripts/Projectile Motion/Controllers/ProjectileMotionController.cs" Line="39" Column="36" />
       <File FileName="Assets/Scripts/Projectile Motion/Models/ProjectileMotionModel.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Projectile Motion/Views/ProjectileMotionView.cs" Line="8" Column="2" />
-      <File FileName="Assets/Scripts/Projectile Motion/ProjectileMotionApplication.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Projectile Motion/Components/PlatformRotator.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Projectile Motion/Views/CannonView.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
