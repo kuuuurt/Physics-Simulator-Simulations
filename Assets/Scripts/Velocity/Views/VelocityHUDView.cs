@@ -12,5 +12,6 @@ public class VelocityHUDView : VelocityElement{
 	public Slider velocitySlider;
 
 	public Button buttonStop;
+	public Button buttonPause;
 }
 

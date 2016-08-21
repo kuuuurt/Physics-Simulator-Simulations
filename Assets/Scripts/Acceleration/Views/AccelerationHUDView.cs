@@ -15,5 +15,6 @@ public class AccelerationHUDView : AccelerationElement{
 	public Slider brakeSlider;
 
 	public Button buttonStop;
+	public Button buttonPause;
 }
 

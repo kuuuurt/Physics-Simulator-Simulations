@@ -18,7 +18,7 @@ public class AccelerationController : AccelerationElement{
 					app.model.accelerationRate = app.view.HUD.accelerationSlider.value;
 					app.model.brakeRate = app.view.HUD.brakeSlider.value;
 					app.model.distance = app.view.car.transform.position.z - app.model.startPos;
-					app.model.time = Time.time - app.model.startTime;
+					app.model.time = (Time.time - app.model.startTime) + app.model.previousTime;
 					if (app.model.accelerate) {
 						app.model.velocity += Time.deltaTime * app.model.accelerationRate;
 						if (app.model.velocity > app.model.maxSpeed) {
@@ -35,6 +35,7 @@ public class AccelerationController : AccelerationElement{
 					}
 				} else {
 					app.view.HUD.buttonStop.gameObject.SetActive (false);
+					app.view.HUD.buttonPause.gameObject.SetActive (false);
 					app.view.results.gameObject.SetActive(true);
 					app.view.results.accelerationText.text = string.Format("{0:0.00}", app.model.targetDistance / app.model.velocity) + " m / s2";
 					app.view.results.distanceText.text = string.Format("{0:0.00}", app.model.targetDistance) + " m";
@@ -48,6 +49,23 @@ public class AccelerationController : AccelerationElement{
 		}
 	}
 
+	public void pauseResume(){
+		if (app.model.simulate) {
+			app.view.HUD.buttonPause.GetComponentInChildren<Text> ().text = "Resume";
+			app.model.simulate = false;
+			app.model.previousTime = app.model.time;
+			app.model.previousVelocity = app.model.velocity;
+			app.model.dontSetVelocity = true;
+			app.model.velocity = 0f;
+		} else {
+			app.view.HUD.buttonPause.GetComponentInChildren<Text> ().text = "Pause";
+			app.model.dontSetVelocity = false;
+			app.model.simulate = true;
+			app.model.velocity = app.model.previousVelocity;
+			app.model.startTime = Time.time;
+		}
+	}
+
 	public void reset(){
 		app.view.results.gameObject.SetActive(false);
 		app.model.dontSetVelocity = false;
@@ -56,6 +74,7 @@ public class AccelerationController : AccelerationElement{
 		app.model.time = 0f;
 		app.model.simulate = false;
 		app.view.HUD.buttonStop.gameObject.SetActive (false);
+		app.view.HUD.buttonPause.gameObject.SetActive (false);
 		app.view.startScreen.targetDistance.text = "";
 		app.view.startScreen.gameObject.SetActive (true);
 	}
@@ -64,6 +83,7 @@ public class AccelerationController : AccelerationElement{
 		app.model.simulate = true;
 
 		app.view.HUD.buttonStop.gameObject.SetActive (true);
+		app.view.HUD.buttonPause.gameObject.SetActive (true);
 		app.model.startPos = app.view.car.transform.position.z;
 		app.model.endPos = app.model.startPos + app.model.targetDistance;
 

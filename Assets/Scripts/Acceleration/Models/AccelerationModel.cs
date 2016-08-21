@@ -27,6 +27,7 @@ public class AccelerationModel : AccelerationElement {
 	public float startPos;
 	public float endPos;
 
-
+	public float previousTime;
+	public float previousVelocity;
 
 }
