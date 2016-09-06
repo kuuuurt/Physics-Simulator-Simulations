@@ -5,6 +5,14 @@ using System;
 
 public class AccelerationController : AccelerationElement{
 
+	float previousTime;
+	float previousVelocity;
+
+	bool simulate;
+	bool tutorialOngoing;
+
+	bool accelerate;
+	bool brake;
 
 
 	void Start(){
@@ -12,25 +20,24 @@ public class AccelerationController : AccelerationElement{
 	}
 
 	void Update(){
-		if (!app.model.tutorialOngoing) {
-			if (app.model.simulate) {
+		if (!tutorialOngoing) {
+			if (simulate) {
 				if (app.model.distance < app.model.targetDistance) {
 					app.model.accelerationRate = app.view.HUD.accelerationSlider.value;
 					app.model.brakeRate = app.view.HUD.brakeSlider.value;
 					app.model.distance = app.view.car.transform.position.z - app.model.startPos;
-					app.model.time = (Time.time - app.model.startTime) + app.model.previousTime;
-					if (app.model.accelerate) {
+					app.model.time = (Time.time - app.model.startTime) + previousTime;
+					if (accelerate) {
 						app.model.velocity += Time.deltaTime * app.model.accelerationRate;
 						if (app.model.velocity > app.model.maxSpeed) {
 							app.model.velocity = app.model.maxSpeed;
-							app.model.accelerate = false;
+							accelerate = false;
 						}
-						Debug.Log ("Acceleration : " + app.model.velocity / app.model.time);
-					} else if (app.model.brake) {
+					} else if (brake) {
 						app.model.velocity -= Time.deltaTime * app.model.brakeRate;
 						if (app.model.velocity < 0) {
 							app.model.velocity = 0;
-							app.model.brake = false;
+							brake = false;
 						}
 					}
 				} else {
@@ -43,25 +50,25 @@ public class AccelerationController : AccelerationElement{
 
 					app.model.dontSetVelocity = true;
 					app.model.velocity = 0f;
-					app.model.simulate = false;
+					simulate = false;
 				}
 			}
 		}
 	}
 
 	public void pauseResume(){
-		if (app.model.simulate) {
+		if (simulate) {
 			app.view.HUD.buttonPause.GetComponentInChildren<Text> ().text = "Resume";
-			app.model.simulate = false;
-			app.model.previousTime = app.model.time;
-			app.model.previousVelocity = app.model.velocity;
+			simulate = false;
+			previousTime = app.model.time;
+			previousVelocity = app.model.velocity;
 			app.model.dontSetVelocity = true;
 			app.model.velocity = 0f;
 		} else {
 			app.view.HUD.buttonPause.GetComponentInChildren<Text> ().text = "Pause";
 			app.model.dontSetVelocity = false;
-			app.model.simulate = true;
-			app.model.velocity = app.model.previousVelocity;
+			simulate = true;
+			app.model.velocity = previousVelocity;
 			app.model.startTime = Time.time;
 		}
 	}
@@ -72,15 +79,16 @@ public class AccelerationController : AccelerationElement{
 		app.model.velocity = 0f;
 		app.model.distance = 0f;
 		app.model.time = 0f;
-		app.model.simulate = false;
+		simulate = false;
 		app.view.HUD.buttonStop.gameObject.SetActive (false);
 		app.view.HUD.buttonPause.gameObject.SetActive (false);
 		app.view.startScreen.targetDistance.text = "";
 		app.view.startScreen.gameObject.SetActive (true);
+		app.view.HUD.buttonPause.GetComponentInChildren<Text> ().text = "Pause";
 	}
 
 	public void startSimulation(){		
-		app.model.simulate = true;
+		simulate = true;
 
 		app.view.HUD.buttonStop.gameObject.SetActive (true);
 		app.view.HUD.buttonPause.gameObject.SetActive (true);
@@ -98,8 +106,8 @@ public class AccelerationController : AccelerationElement{
 
 	public void startTutorial(){
 		reset ();
-		app.model.simulate = false;
-		app.model.tutorialOngoing = true;
+		simulate = false;
+		tutorialOngoing = true;
 		app.model.velocity = 0;
 		int i = 1;
 		while (true) {
@@ -115,7 +123,7 @@ public class AccelerationController : AccelerationElement{
 	public void validateTargetDistance(Button btnDone){
 		try{
 			app.model.targetDistance = float.Parse(app.view.startScreen.targetDistance.text);
-			if(app.model.tutorialOngoing){
+			if(tutorialOngoing){
 				btnDone.interactable = true;
 			}
 			app.view.startScreen.buttonStart.interactable = true;
@@ -127,7 +135,7 @@ public class AccelerationController : AccelerationElement{
 	}
 
 	public void stopTutorial(){
-		app.model.tutorialOngoing = false;
+		tutorialOngoing = false;
 		int i = 0;
 		while (true) {
 			try{
@@ -140,24 +148,23 @@ public class AccelerationController : AccelerationElement{
 		
 
 	public void accelerateCar(){
-		app.model.accelerate = true;
+		accelerate = true;
 		app.model.startAccelerate = Time.time;
-		app.model.brake = false;
+		brake = false;
 	}
 
 	public void stopAcceleration(){
-		app.model.accelerate = false;
+		accelerate = false;
 	}
 
 	public void brakeCar(){
-		app.model.brake = true;
+		brake = true;
 		app.model.startAccelerate = Time.time;
-		app.model.accelerate = false;
+		accelerate = false;
 	}
 
 	public void stopBraking(){
-		app.model.brake = false;
-
+		brake = false;
 	}
 }
 

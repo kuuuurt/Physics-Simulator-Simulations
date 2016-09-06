@@ -11,14 +11,8 @@ public class AccelerationModel : AccelerationElement {
 	public float time;
 	public float distance;
 
-	public bool simulate;
-	public bool tutorialOngoing;
-	public bool dontSetVelocity;
 
 	public float startAccelerate;
-
-	public bool accelerate;
-	public bool brake;
 
 	public float targetDistance;
 
@@ -27,7 +21,7 @@ public class AccelerationModel : AccelerationElement {
 	public float startPos;
 	public float endPos;
 
-	public float previousTime;
-	public float previousVelocity;
+	public bool dontSetVelocity;
+
 
 }

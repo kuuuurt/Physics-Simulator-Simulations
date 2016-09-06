@@ -89,6 +89,8 @@
      <Compile Include="Assets\Downloaded Assets\Helicopter\Scripts\LookAtTargetController.cs" />
      <Compile Include="Assets\Downloaded Assets\Helicopter\Scripts\PressedKeyCode.cs" />
      <Compile Include="Assets\Downloaded Assets\Helicopter\Scripts\UIGameController.cs" />
+     <Compile Include="Assets\Downloaded Assets\RPG Character Animation Pack\Code\RPGCharacterControllerFREE.cs" />
+     <Compile Include="Assets\Downloaded Assets\RPG Character Animation Pack\Code\SmoothFollow.cs" />
      <Compile Include="Assets\Scripts\Acceleration\AccelerationApplication.cs" />
      <Compile Include="Assets\Scripts\Acceleration\Components\AccelerationGroundRecycler.cs" />
      <Compile Include="Assets\Scripts\Acceleration\Components\AccelerationWheelRotator.cs" />
@@ -110,7 +112,10 @@
      <Compile Include="Assets\Scripts\Free-fall\Controllers\FreefallController.cs" />
      <Compile Include="Assets\Scripts\Free-fall\FreefallApplication.cs" />
      <Compile Include="Assets\Scripts\Free-fall\Models\FreefallModel.cs" />
+     <Compile Include="Assets\Scripts\Free-fall\Views\CrateView.cs" />
+     <Compile Include="Assets\Scripts\Free-fall\Views\FreefallHUDView.cs" />
      <Compile Include="Assets\Scripts\Free-fall\Views\FreefallView.cs" />
+     <Compile Include="Assets\Scripts\Free-fall\Views\GroundView.cs" />
      <Compile Include="Assets\Scripts\Friction\Controllers\FrictionController.cs" />
      <Compile Include="Assets\Scripts\Friction\FrictionApplication.cs" />
      <Compile Include="Assets\Scripts\Friction\Models\FrictionModel.cs" />

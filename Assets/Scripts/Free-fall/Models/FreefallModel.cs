@@ -2,5 +2,6 @@
 using System.Collections;
 
 public class FreefallModel : FreefallElement {
-
+	public float velocity;
+	public float height;
 }
