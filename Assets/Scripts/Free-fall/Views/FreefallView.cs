@@ -9,7 +9,8 @@ public class FreefallView : FreefallElement {
 
 	void Update() {
 		app.view.HUD.velocityText.text = string.Format("{0:0.00}", app.model.velocity) + " m / s";
-		app.view.HUD.heightText.text = string.Format("{0:0.00}", app.model.height) + " m / s";
+		app.view.HUD.heightText.text = string.Format("{0:0.00}", app.model.height) + " m";
+		app.view.HUD.timeText.text = string.Format("{0:0.00}", app.model.time) + " s";
 	}
 
 }
