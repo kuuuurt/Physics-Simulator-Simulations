@@ -80,15 +80,6 @@
      <Compile Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Scripts\Tonemapping.cs" />
      <Compile Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Scripts\Triangles.cs" />
      <Compile Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Scripts\VignetteAndChromaticAberration.cs" />
-     <Compile Include="Assets\Downloaded Assets\Helicopter\Scripts\Checkpoint.cs" />
-     <Compile Include="Assets\Downloaded Assets\Helicopter\Scripts\CheckpointController.cs" />
-     <Compile Include="Assets\Downloaded Assets\Helicopter\Scripts\ControlPanel.cs" />
-     <Compile Include="Assets\Downloaded Assets\Helicopter\Scripts\FollowTargetCamera.cs" />
-     <Compile Include="Assets\Downloaded Assets\Helicopter\Scripts\HeliRotorController.cs" />
-     <Compile Include="Assets\Downloaded Assets\Helicopter\Scripts\HelicopterController.cs" />
-     <Compile Include="Assets\Downloaded Assets\Helicopter\Scripts\LookAtTargetController.cs" />
-     <Compile Include="Assets\Downloaded Assets\Helicopter\Scripts\PressedKeyCode.cs" />
-     <Compile Include="Assets\Downloaded Assets\Helicopter\Scripts\UIGameController.cs" />
      <Compile Include="Assets\Downloaded Assets\RPG Character Animation Pack\Code\RPGCharacterControllerFREE.cs" />
      <Compile Include="Assets\Downloaded Assets\RPG Character Animation Pack\Code\SmoothFollow.cs" />
      <Compile Include="Assets\Scripts\Acceleration\AccelerationApplication.cs" />

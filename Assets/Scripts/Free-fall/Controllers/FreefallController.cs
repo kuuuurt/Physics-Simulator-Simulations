@@ -25,8 +25,10 @@ public class FreefallController : FreefallElement{
 					app.model.velocity = app.view.crate.rigidBody.velocity.y;
 					app.model.height = app.view.crate.transform.position.y - app.view.ground.transform.position.y - 0.5f;
 					app.model.time = (Time.time - startTime) + previousTime;
+
 				} else {
-					app.view.playScreen.gameObject.SetActive (false);
+					app.view.playScreen.buttonStop.interactable = false;
+					app.view.playScreen.buttonPause.interactable = false;
 					app.view.results.gameObject.SetActive(true);
 					app.view.results.timeText.text = string.Format("{0:0.00}", app.model.time) + " s";
 					app.view.results.heightText.text = string.Format("{0:0.00}", app.view.startScreen.heightSlider.value) + " m";
@@ -90,6 +92,8 @@ public class FreefallController : FreefallElement{
 		app.view.crate.rigidBody.useGravity = true;
 		app.view.startScreen.gameObject.SetActive (false);
 		app.view.playScreen.gameObject.SetActive (true);
+		app.view.playScreen.buttonStop.interactable = true;
+		app.view.playScreen.buttonPause.interactable = true;
 	}
 
 	public void reset(){
@@ -99,6 +103,7 @@ public class FreefallController : FreefallElement{
 		app.model.height = 0f;
 		app.model.time = 0f;
 		simulate = false;
+		paused = false;
 		app.view.playScreen.buttonPause.GetComponentInChildren<Text> ().text = "Pause";
 		app.view.startScreen.gameObject.SetActive (true);
 		app.view.playScreen.gameObject.SetActive (false);
