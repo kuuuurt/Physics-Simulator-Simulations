@@ -4,71 +4,69 @@ using System;
 public class ProjectileMotionController : ProjectileMotionElement{
 
 	GameObject projectilePrefab;
+	bool simulate;
+	bool tutorialOngoing;
+
 
 	void Start(){
 		projectilePrefab = Resources.Load("Projectile Cannon") as GameObject;
 		startTutorial ();
+
 		//Initialize components
 		initComponents();
 	}
 
 	void Update(){
-		
+		if (simulate) {
+
+		} else {
+			app.model.angle = app.view.startScreen.angle.value;
+		}
 	}
 
 	void initComponents(){
 		
 	}
 
-	void startTutorial(){
+	public void startTutorial(){
 		
 	}
 
-	void stopTutorial(){
+	public void stopTutorial(){
 
 	}
 
-	void reset(){
+	public void reset(){
 
 	}
 
-	void pauseResume(){
+	public void pauseResume(){
 
 	}
 
-	void startSimulation(){
-		
+	public void startSimulation(){
+		app.model.angle = app.view.startScreen.angle.value + 10;
+		app.model.velocity = app.view.startScreen.initialVelocity.value;
+		generateButton ();
 	}
 
-	void generateButton(){
+	public void generateButton(){
 		GameObject projectile = Instantiate (projectilePrefab) as GameObject;
-		float angle = (float)Math.Abs(app.view.cannon.transform.eulerAngles.x -  360);
 
+		float x = Mathf.Cos (app.model.angle * Mathf.Deg2Rad) * 2.4f;
+		float y = Mathf.Sin (app.model.angle * Mathf.Deg2Rad) * 2.4f;
 
-		//projectile.transform.Rotate(new Vector3 (0, 0, app.view.cannon.transform.eulerAngles.x + 9.25f));
-
-		//			while (angle > 90)
-		//				angle -= 90;
-		//
-		//			while (angle < -90)
-		//				angle += 90;
-
-
-		float[] x = new float[2];
-		float[] y = new float[2];
-		Debug.Log (Mathf.Cos ((90 - angle) * Mathf.Deg2Rad));
-		x [0] = Mathf.Cos (angle * Mathf.Deg2Rad) * 1.9f;
-		y [0] = Mathf.Sin (angle * Mathf.Deg2Rad) * 1.9f;
-		x [1] = Mathf.Cos ((90 - angle) * Mathf.Deg2Rad) * -1.27f;
-		y [1] = Mathf.Sin ((90 - angle) * Mathf.Deg2Rad) * 1.27f;
-
-		Debug.Log (x [0] + " " + x [1]);
-		Debug.Log (y [0] + " " + y [1]);
-
-		projectile.transform.position = app.view.cannon.transform.position + new Vector3(x[0] + x[1], y[0] + y[1], 0);
+		projectile.transform.position = app.view.cannon.transform.position + new Vector3(x, y, 0);
+		projectile.transform.position = app.view.cannon.transform.position + new Vector3(2.05f, 0.85f, 0);
+//		projectile.transform.rotation = app.view.cannon.transform.rotation;
+		projectile.transform.RotateAround (new Vector3 (app.view.cannon.transform.position.x, app.view.cannon.transform.position.y, app.view.cannon.transform.position.z)
+			, Vector3.forward, app.model.angle - projectile.transform.eulerAngles.z);
+	
 
 		Rigidbody rg = projectile.GetComponent<Rigidbody> ();
-		rg.AddForce(new Vector3(app.view.cannon.transform.eulerAngles.x, app.view.cannon.transform.eulerAngles.y,0));
+		app.model.velocityX = Mathf.Cos (app.model.angle * Mathf.Deg2Rad) * app.model.velocity;
+		app.model.velocityY = Mathf.Sin (app.model.angle * Mathf.Deg2Rad) * app.model.velocity;
+		rg.velocity = new Vector3(app.model.velocityX, app.model.velocityY,0);
 	}
 }
 
