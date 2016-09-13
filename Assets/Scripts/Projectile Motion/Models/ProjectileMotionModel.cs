@@ -13,5 +13,6 @@ public class ProjectileMotionModel : ProjectileMotionElement {
 
 	public float angle;
 
+	public bool dontSetVelocity;
 
 }
