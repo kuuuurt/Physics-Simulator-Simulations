@@ -114,6 +114,7 @@
      <Compile Include="Assets\Scripts\Friction\Controllers\FrictionController.cs" />
      <Compile Include="Assets\Scripts\Friction\FrictionApplication.cs" />
      <Compile Include="Assets\Scripts\Friction\Models\FrictionModel.cs" />
+     <Compile Include="Assets\Scripts\Friction\Views\FrictionHUDView.cs" />
      <Compile Include="Assets\Scripts\Friction\Views\FrictionView.cs" />
      <Compile Include="Assets\Scripts\Momentum and Impulse\Controllers\MomentumAndImpulseController.cs" />
      <Compile Include="Assets\Scripts\Momentum and Impulse\Models\MomentumAndImpulseModel.cs" />
