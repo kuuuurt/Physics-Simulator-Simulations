@@ -19,13 +19,15 @@ public class ProjectileMotionController : ProjectileMotionElement{
 
 
 	void Start(){
-		projectilePrefab = Resources.Load("Projectile Cannon") as GameObject;
+		projectilePrefab = Resources.Load("Projectile Motion/Projectile Cannon") as GameObject;
 		startTutorial ();
 	}
 
 	void Update(){
 		if (simulate) {
 			app.model.height = projectile.transform.position.y - app.view.ground.transform.position.y - 2.6f;
+			if (app.model.maxHeight < app.model.height)
+				app.model.maxHeight = app.model.height;
 			if (app.model.height > 0) {
 				app.model.velocity = projectileRG.velocity.magnitude;
 				app.model.velocityX = projectileRG.velocity.x;
@@ -34,8 +36,12 @@ public class ProjectileMotionController : ProjectileMotionElement{
 				if(!paused)
 					app.model.time = (Time.time - startTime) + previousTime;
 			} else {
-				//show results
-				reset ();
+				app.view.results.gameObject.SetActive (true);
+				app.view.results.timeText.text = string.Format("{0:0.00}", app.model.time) + " s";
+				app.view.results.heightText.text = string.Format("{0:0.00}", app.model.maxHeight) + " m";
+				app.view.results.rangeText.text = string.Format("{0:0.00}", app.model.range) + " m";
+				app.view.results.initialVelocityText.text = string.Format("{0:0.00}", app.view.startScreen.initialVelocity.value) + " m / s";
+				app.view.results.angleText.text = string.Format("{0:0.00}", app.view.startScreen.angle.value+10) + " deg NE";
 			}
 		} else {
 			app.model.angle = app.view.startScreen.angle.value;
@@ -74,6 +80,7 @@ public class ProjectileMotionController : ProjectileMotionElement{
 
 	public void reset(){
 		Destroy (projectile);
+		app.view.results.gameObject.SetActive (false);
 		simulate = false;
 		app.view.startScreen.gameObject.SetActive (true);
 		app.view.playScreen.gameObject.SetActive (false);
@@ -125,7 +132,7 @@ public class ProjectileMotionController : ProjectileMotionElement{
 		projectile.transform.position = app.view.cannon.transform.position + new Vector3(2.05f, 0.85f, 0);
 //		projectile.transform.rotation = app.view.cannon.transform.rotation;
 		projectile.transform.RotateAround (new Vector3 (app.view.cannon.transform.position.x, app.view.cannon.transform.position.y, app.view.cannon.transform.position.z)
-			, Vector3.forward, app.model.angle - projectile.transform.eulerAngles.z);
+			, Vector3.forward, (app.model.angle + 10) - projectile.transform.eulerAngles.z);
 	
 
 		projectileRG = projectile.GetComponent<Rigidbody> ();

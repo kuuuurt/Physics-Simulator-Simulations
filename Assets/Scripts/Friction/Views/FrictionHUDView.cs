@@ -2,11 +2,13 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class FrictionHUDView : MonoBehaviour {
+public class FrictionHUDView : FrictionElement {
 
-	public Text forceAppliedText;
+
 	public Text coefficientOfFrictionText;
-	public Text netForceText;
+	public Text forceText;
 
-	public Slider forceApplied;
+	public Slider forceSlider;
+	public Slider frictionSlider;
+
 }

@@ -10,6 +10,7 @@ public class ProjectileMotionModel : ProjectileMotionElement {
 	public float height;
 	public float range;
 	public float time;
+	public float maxHeight;
 
 	public float angle;
 

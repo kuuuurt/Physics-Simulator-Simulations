@@ -3,8 +3,11 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class FrictionView : FrictionElement {
-	void Update() {
+	public FrictionHUDView HUD;
 
-	}
+	public GameObject ground;
+	public GameObject[] floor;
+	public GameObject boxObject;
+	public GameObject instructions;
 
 }
