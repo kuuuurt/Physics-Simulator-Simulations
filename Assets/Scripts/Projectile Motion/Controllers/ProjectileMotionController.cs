@@ -28,7 +28,8 @@ public class ProjectileMotionController : ProjectileMotionElement{
 			app.model.height = projectile.transform.position.y - app.view.ground.transform.position.y - 2.6f;
 			if (app.model.maxHeight < app.model.height)
 				app.model.maxHeight = app.model.height;
-			if (app.model.height > 0) {
+			Debug.Log (app.model.height);
+			if (app.model.height > 0.1f && app.model.velocity > 0) {
 				app.model.velocity = projectileRG.velocity.magnitude;
 				app.model.velocityX = projectileRG.velocity.x;
 				app.model.velocityY = projectileRG.velocity.y;
@@ -84,6 +85,7 @@ public class ProjectileMotionController : ProjectileMotionElement{
 		simulate = false;
 		app.view.startScreen.gameObject.SetActive (true);
 		app.view.playScreen.gameObject.SetActive (false);
+		app.view.playScreen.buttonPause.GetComponentInChildren<Text> ().text = "Pause";
 	}
 
 	public void pauseResume(){
