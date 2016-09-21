@@ -66,6 +66,7 @@
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\SunShaftsComposite.shader" />
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionCurves.shader" />
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\ScreenSpaceAmbientObscurance.shader" />
+     <None Include="Assets\Downloaded Assets\Earth\Readme.txt" />
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\NFAA.shader" />
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\TiltShiftHdrLensBlur.shader" />
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\VignetteShader.shader" />
@@ -74,6 +75,7 @@
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\Projectors\Guidelines.txt" />
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\MotionBlur.shader" />
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBloom.shader" />
+     <None Include="Assets\Downloaded Assets\Earth\Materials\EarthShader.shader" />
      <None Include="Assets\Fonts\roboto\Apache License.txt" />
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\MinMaxReduction.shader" />
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\SSAA.shader" />

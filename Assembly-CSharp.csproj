@@ -80,6 +80,9 @@
      <Compile Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Scripts\Tonemapping.cs" />
      <Compile Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Scripts\Triangles.cs" />
      <Compile Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Scripts\VignetteAndChromaticAberration.cs" />
+     <Compile Include="Assets\Downloaded Assets\Earth\Scripts\EarthScript.cs" />
+     <Compile Include="Assets\Downloaded Assets\Earth\Scripts\MoveScript.cs" />
+     <Compile Include="Assets\Downloaded Assets\Earth\Scripts\SphereScript.cs" />
      <Compile Include="Assets\Downloaded Assets\RPG Character Animation Pack\Code\RPGCharacterControllerFREE.cs" />
      <Compile Include="Assets\Scripts\Acceleration\AccelerationApplication.cs" />
      <Compile Include="Assets\Scripts\Acceleration\Components\AccelerationGroundRecycler.cs" />
@@ -94,6 +97,7 @@
      <Compile Include="Assets\Scripts\Centripetal and Centrifugal Forces\CentripetalAndCentrifugalForcesApplication.cs" />
      <Compile Include="Assets\Scripts\Centripetal and Centrifugal Forces\Controllers\CentripetalAndCentrifugalForcesController.cs" />
      <Compile Include="Assets\Scripts\Centripetal and Centrifugal Forces\Models\CentripetalAndCentrifugalForcesModel.cs" />
+     <Compile Include="Assets\Scripts\Centripetal and Centrifugal Forces\Views\CentripetalAndCentrifugalForcesHUDView.cs" />
      <Compile Include="Assets\Scripts\Centripetal and Centrifugal Forces\Views\CentripetalAndCentrifugalForcesView.cs" />
      <Compile Include="Assets\Scripts\Energy\Controllers\EnergyController.cs" />
      <Compile Include="Assets\Scripts\Energy\EnergyApplication.cs" />
@@ -143,6 +147,7 @@
      <Compile Include="Assets\Scripts\Uniform Circular Motion\Controllers\UniformCircularMotionController.cs" />
      <Compile Include="Assets\Scripts\Uniform Circular Motion\Models\UniformCircularMotionModel.cs" />
      <Compile Include="Assets\Scripts\Uniform Circular Motion\UniformCircularMotionApplication.cs" />
+     <Compile Include="Assets\Scripts\Uniform Circular Motion\Views\UniformCircularMotionHUDView.cs" />
      <Compile Include="Assets\Scripts\Uniform Circular Motion\Views\UniformCircularMotionView.cs" />
      <Compile Include="Assets\Scripts\Velocity\Components\VelocityGroundRecycler.cs" />
      <Compile Include="Assets\Scripts\Velocity\Components\VelocityWheelRotator.cs" />
@@ -169,6 +174,7 @@
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\SunShaftsComposite.shader" />
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionCurves.shader" />
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\ScreenSpaceAmbientObscurance.shader" />
+     <None Include="Assets\Downloaded Assets\Earth\Readme.txt" />
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\NFAA.shader" />
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\TiltShiftHdrLensBlur.shader" />
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\VignetteShader.shader" />
@@ -177,6 +183,7 @@
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\Projectors\Guidelines.txt" />
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\MotionBlur.shader" />
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBloom.shader" />
+     <None Include="Assets\Downloaded Assets\Earth\Materials\EarthShader.shader" />
      <None Include="Assets\Fonts\roboto\Apache License.txt" />
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\MinMaxReduction.shader" />
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\SSAA.shader" />
