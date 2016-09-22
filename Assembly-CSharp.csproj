@@ -148,6 +148,10 @@
      <Compile Include="Assets\Scripts\Uniform Circular Motion\Models\UniformCircularMotionModel.cs" />
      <Compile Include="Assets\Scripts\Uniform Circular Motion\UniformCircularMotionApplication.cs" />
      <Compile Include="Assets\Scripts\Uniform Circular Motion\Views\UniformCircularMotionHUDView.cs" />
+     <Compile Include="Assets\Scripts\Uniform Circular Motion\Views\UniformCircularMotionPlayScreenView.cs" />
+     <Compile Include="Assets\Scripts\Uniform Circular Motion\Views\UniformCircularMotionResultsView.cs" />
+     <Compile Include="Assets\Scripts\Uniform Circular Motion\Views\UniformCircularMotionSatelliteView.cs" />
+     <Compile Include="Assets\Scripts\Uniform Circular Motion\Views\UniformCircularMotionStartScreenView.cs" />
      <Compile Include="Assets\Scripts\Uniform Circular Motion\Views\UniformCircularMotionView.cs" />
      <Compile Include="Assets\Scripts\Velocity\Components\VelocityGroundRecycler.cs" />
      <Compile Include="Assets\Scripts\Velocity\Components\VelocityWheelRotator.cs" />
