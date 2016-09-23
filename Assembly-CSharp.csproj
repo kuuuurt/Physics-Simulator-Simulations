@@ -98,6 +98,9 @@
      <Compile Include="Assets\Scripts\Centripetal and Centrifugal Forces\Controllers\CentripetalAndCentrifugalForcesController.cs" />
      <Compile Include="Assets\Scripts\Centripetal and Centrifugal Forces\Models\CentripetalAndCentrifugalForcesModel.cs" />
      <Compile Include="Assets\Scripts\Centripetal and Centrifugal Forces\Views\CentripetalAndCentrifugalForcesHUDView.cs" />
+     <Compile Include="Assets\Scripts\Centripetal and Centrifugal Forces\Views\CentripetalAndCentrifugalForcesPlayScreenView.cs" />
+     <Compile Include="Assets\Scripts\Centripetal and Centrifugal Forces\Views\CentripetalAndCentrifugalForcesResultsView.cs" />
+     <Compile Include="Assets\Scripts\Centripetal and Centrifugal Forces\Views\CentripetalAndCentrifugalForcesStartScreenView.cs" />
      <Compile Include="Assets\Scripts\Centripetal and Centrifugal Forces\Views\CentripetalAndCentrifugalForcesView.cs" />
      <Compile Include="Assets\Scripts\Energy\Controllers\EnergyController.cs" />
      <Compile Include="Assets\Scripts\Energy\EnergyApplication.cs" />

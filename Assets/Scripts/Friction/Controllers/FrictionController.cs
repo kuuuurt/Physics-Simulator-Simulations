@@ -4,13 +4,16 @@ using System;
 public class FrictionController : FrictionElement{
 	
 	bool tutorialOngoing;
-	bool rotateLeft, rotateRight;
+
+	Rigidbody rg;
 
 	void Start(){
 		//startTutorial ();
 		stopTutorial();
 		//Initialize components
+		rg = app.view.boxObject.GetComponent<Rigidbody> ();
 	}
+
 
 	void Update(){
 		app.view.HUD.forceText.text = app.view.HUD.forceSlider.value + " N";
@@ -47,13 +50,14 @@ public class FrictionController : FrictionElement{
 		
 		app.model.coefficient = app.view.HUD.frictionSlider.value;
 		app.model.force = app.view.HUD.forceSlider.value;
-		foreach (GameObject f in app.view.floor) {
-			f.GetComponent<BoxCollider> ().material.dynamicFriction = app.model.coefficient;
-		}
+		rg.velocity = Vector3.zero;
+		rg.angularVelocity = Vector3.zero;
+		app.view.floor.GetComponent<BoxCollider> ().material.dynamicFriction = app.model.coefficient;
+		Debug.Log (Vector3.forward  * app.model.force);
 		if(direction.Equals("right"))
-			app.view.boxObject.GetComponent<Rigidbody> ().AddForce (new Vector3 (0, 0, app.model.force));
+			rg.AddForce (transform.forward * app.model.force, ForceMode.Force);
 		else 
-			app.view.boxObject.GetComponent<Rigidbody> ().AddForce (new Vector3 (0, 0, -app.model.force));
+			rg.AddForce (-transform.forward * app.model.force, ForceMode.Force);
 	}
 }
 

@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Uniform Circular Motion.unity
+- path: Assets/Scenes/Centripetal and Centrifugal Forces.unity
   isLoaded: 1
   isActive: 1

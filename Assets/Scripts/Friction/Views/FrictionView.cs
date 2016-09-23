@@ -6,7 +6,7 @@ public class FrictionView : FrictionElement {
 	public FrictionHUDView HUD;
 
 	public GameObject ground;
-	public GameObject[] floor;
+	public GameObject floor;
 	public GameObject boxObject;
 	public GameObject instructions;
 
