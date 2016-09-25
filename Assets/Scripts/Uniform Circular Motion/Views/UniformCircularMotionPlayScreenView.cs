@@ -6,6 +6,6 @@ public class UniformCircularMotionPlayScreenView : UniformCircularMotionElement 
 
 	public Button buttonPause;
 	public Button buttonStop;
-
+	public Text velocity;
 }
 

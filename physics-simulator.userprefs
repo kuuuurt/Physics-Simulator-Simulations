@@ -1,21 +1,12 @@
 ﻿<Properties RefactoringSettings.EnableRefactorings="True" StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Centripetal and Centrifugal Forces\Controllers\CentripetalAndCentrifugalForcesController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Energy\Controllers\EnergyController.cs">
     <Files>
-      <File FileName="Assets\Scripts\Uniform Circular Motion\Views\UniformCircularMotionHUDView.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Friction\Controllers\FrictionController.cs" Line="58" Column="31" />
-      <File FileName="Assets\Scripts\Friction\Views\FrictionHUDView.cs" Line="15" Column="1" />
-      <File FileName="Assets\Scripts\Friction\Views\FrictionView.cs" Line="9" Column="26" />
-      <File FileName="Assets\Scripts\Friction\Models\FrictionModel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Centripetal and Centrifugal Forces\Controllers\CentripetalAndCentrifugalForcesController.cs" Line="92" Column="32" />
+      <File FileName="Assets\Scripts\Energy\Views\EnergyView.cs" Line="13" Column="1" />
+      <File FileName="Assets\Scripts\Energy\Controllers\EnergyController.cs" Line="27" Column="37" />
+      <File FileName="Assets\Scripts\Centripetal and Centrifugal Forces\Controllers\CentripetalAndCentrifugalForcesController.cs" Line="115" Column="3" />
+      <File FileName="Assets\Scripts\Energy\Models\EnergyModel.cs" Line="10" Column="1" />
     </Files>
-    <Pads>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State>
-          <Value>rg</Value>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

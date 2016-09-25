@@ -6,7 +6,6 @@ public class CentripetalAndCentrifugalForcesController : CentripetalAndCentrifug
 
 	bool simulate;
 	bool paused;
-	bool tutorialOngoing;
 	bool finished;
 	float startTime;
 	float targetTime;
@@ -53,7 +52,6 @@ public class CentripetalAndCentrifugalForcesController : CentripetalAndCentrifug
 	public void startTutorial(){
 		reset ();
 		simulate = false;
-		tutorialOngoing = true;
 		app.model.tangentialVelocity = 0;
 		int i = 1;
 		while (true) {
@@ -67,7 +65,6 @@ public class CentripetalAndCentrifugalForcesController : CentripetalAndCentrifug
 	}
 
 	public void stopTutorial(){
-		tutorialOngoing = false;
 		int i = 0;
 		while (true) {
 			try{

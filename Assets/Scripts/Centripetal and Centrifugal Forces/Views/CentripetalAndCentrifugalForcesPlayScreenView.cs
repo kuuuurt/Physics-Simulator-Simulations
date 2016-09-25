@@ -6,4 +6,7 @@ public class CentripetalAndCentrifugalForcesPlayScreenView : CentripetalAndCentr
 
 	public Button buttonPause;
 	public Button buttonStop;
+	public Text mass;
+	public Text tangentialVelocity;
+	public Text radius;
 }

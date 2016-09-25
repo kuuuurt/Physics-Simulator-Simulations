@@ -25,24 +25,26 @@ public class ProjectileMotionController : ProjectileMotionElement{
 
 	void Update(){
 		if (simulate) {
-			app.model.height = projectile.transform.position.y - app.view.ground.transform.position.y - 2.6f;
-			if (app.model.maxHeight < app.model.height)
-				app.model.maxHeight = app.model.height;
-			Debug.Log (app.model.height);
-			if (app.model.height > 0.1f && app.model.velocity > 0) {
-				app.model.velocity = projectileRG.velocity.magnitude;
-				app.model.velocityX = projectileRG.velocity.x;
-				app.model.velocityY = projectileRG.velocity.y;
-				app.model.range = projectile.transform.position.x - app.view.cannon.transform.position.x - 0.5f;
-				if(!paused)
+			if (!paused) {
+				app.model.height = projectile.transform.position.y - app.view.ground.transform.position.y - 2.6f;
+				if (app.model.maxHeight < app.model.height)
+					app.model.maxHeight = app.model.height;
+				Debug.Log (app.model.height);
+				if (app.model.height > 0.02f) {
+					app.model.velocity = projectileRG.velocity.magnitude;
+					app.model.velocityX = projectileRG.velocity.x;
+					app.model.velocityY = projectileRG.velocity.y;
+					app.model.range = projectile.transform.position.x - app.view.cannon.transform.position.x - 0.5f;
+
 					app.model.time = (Time.time - startTime) + previousTime;
-			} else {
-				app.view.results.gameObject.SetActive (true);
-				app.view.results.timeText.text = string.Format("{0:0.00}", app.model.time) + " s";
-				app.view.results.heightText.text = string.Format("{0:0.00}", app.model.maxHeight) + " m";
-				app.view.results.rangeText.text = string.Format("{0:0.00}", app.model.range) + " m";
-				app.view.results.initialVelocityText.text = string.Format("{0:0.00}", app.view.startScreen.initialVelocity.value) + " m / s";
-				app.view.results.angleText.text = string.Format("{0:0.00}", app.view.startScreen.angle.value+10) + " deg NE";
+				} else {
+					app.view.results.gameObject.SetActive (true);
+					app.view.results.timeText.text = string.Format ("{0:0.00}", app.model.time) + " s";
+					app.view.results.heightText.text = string.Format ("{0:0.00}", app.model.maxHeight) + " m";
+					app.view.results.rangeText.text = string.Format ("{0:0.00}", app.model.range) + " m";
+					app.view.results.initialVelocityText.text = string.Format ("{0:0.00}", app.view.startScreen.initialVelocity.value) + " m / s";
+					app.view.results.angleText.text = string.Format ("{0:0.00}", app.view.startScreen.angle.value + 10) + " deg NE";
+				}
 			}
 		} else {
 			app.model.angle = app.view.startScreen.angle.value;
