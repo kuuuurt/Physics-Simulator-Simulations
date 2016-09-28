@@ -1,15 +1,19 @@
 ﻿<Properties RefactoringSettings.EnableRefactorings="True" StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Energy\Controllers\EnergyController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Velocity\Components\VelocityGroundRecycler.cs">
     <Files>
-      <File FileName="Assets\Scripts\Energy\Views\EnergyView.cs" Line="13" Column="1" />
-      <File FileName="Assets\Scripts\Energy\Controllers\EnergyController.cs" Line="27" Column="37" />
-      <File FileName="Assets\Scripts\Centripetal and Centrifugal Forces\Controllers\CentripetalAndCentrifugalForcesController.cs" Line="115" Column="3" />
-      <File FileName="Assets\Scripts\Energy\Models\EnergyModel.cs" Line="10" Column="1" />
+      <File FileName="Assets\Scripts\Momentum and Impulse\Controllers\MomentumAndImpulseController.cs" Line="80" Column="49" />
+      <File FileName="Assets\Scripts\Momentum and Impulse\Components\MomentumAndImpulseBallCollisionListener.cs" Line="27" Column="30" />
+      <File FileName="Assets\Scripts\Momentum and Impulse\Models\MomentumAndImpulseModel.cs" Line="11" Column="1" />
+      <File FileName="Assets\Scripts\Velocity\Components\VelocityGroundRecycler.cs" Line="26" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="E:\unity-apps\physics-simulator\Assets\Scripts\Momentum and Impulse\Components\MomentumAndImpulseCatcherCollisionListener.cs" line="19" column="1" />
+      <Breakpoint file="E:\unity-apps\physics-simulator\Assets\Scripts\Momentum and Impulse\Components\MomentumAndImpulseCatcherCollisionListener.cs" line="28" column="1" />
+      <Breakpoint file="E:\unity-apps\physics-simulator\Assets\Scripts\Momentum and Impulse\Components\MomentumAndImpulseBallCollisionListener.cs" line="19" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
