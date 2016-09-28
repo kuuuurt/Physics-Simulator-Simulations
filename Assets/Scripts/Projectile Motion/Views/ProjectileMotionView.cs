@@ -7,6 +7,8 @@ public class ProjectileMotionView : ProjectileMotionElement {
 	public CannonView cannon;
 	public GameObject ground;
 	public GameObject instructions;
+	public GameObject camera;
+	public GameObject cannonBall;
 	public ProjectileMotionStartScreenView startScreen;
 	public ProjectileMotionPlayScreenView playScreen;
 	public ProjectileMotionResultsView results;
@@ -18,6 +20,7 @@ public class ProjectileMotionView : ProjectileMotionElement {
 		app.view.HUD.heightText.text = string.Format("{0:0.00}", app.model.height) + " m";
 		app.view.HUD.timeText.text = string.Format("{0:0.00}", app.model.time) + " s";
 		app.view.HUD.rangeText.text = string.Format("{0:0.00}", app.model.range) + " m";
+
 	}
 
 }

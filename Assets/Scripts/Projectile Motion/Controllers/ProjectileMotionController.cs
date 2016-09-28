@@ -4,7 +4,6 @@ using System;
 
 public class ProjectileMotionController : ProjectileMotionElement{
 
-	GameObject projectilePrefab, projectile;
 	Rigidbody projectileRG;
 
 	bool simulate;
@@ -19,14 +18,13 @@ public class ProjectileMotionController : ProjectileMotionElement{
 
 
 	void Start(){
-		projectilePrefab = Resources.Load("Projectile Motion/Projectile Cannon") as GameObject;
 		startTutorial ();
 	}
 
 	void Update(){
 		if (simulate) {
 			if (!paused) {
-				app.model.height = projectile.transform.position.y - app.view.ground.transform.position.y - 2.6f;
+				app.model.height = app.view.cannonBall.transform.position.y - app.view.ground.transform.position.y - 7.6f;
 				if (app.model.maxHeight < app.model.height)
 					app.model.maxHeight = app.model.height;
 				Debug.Log (app.model.height);
@@ -34,7 +32,7 @@ public class ProjectileMotionController : ProjectileMotionElement{
 					app.model.velocity = projectileRG.velocity.magnitude;
 					app.model.velocityX = projectileRG.velocity.x;
 					app.model.velocityY = projectileRG.velocity.y;
-					app.model.range = projectile.transform.position.x - app.view.cannon.transform.position.x - 0.5f;
+					app.model.range = app.view.cannonBall.transform.position.x - app.view.cannon.transform.position.x - 0.5f;
 
 					app.model.time = (Time.time - startTime) + previousTime;
 				} else {
@@ -48,6 +46,7 @@ public class ProjectileMotionController : ProjectileMotionElement{
 			}
 		} else {
 			app.model.angle = app.view.startScreen.angle.value;
+			app.view.cannonBall.transform.rotation = new Quaternion (0, 0, 0, 0.6f);
 		}
 	}
 
@@ -81,8 +80,16 @@ public class ProjectileMotionController : ProjectileMotionElement{
 		}
 	}
 
+	void resetProjectile(){
+		projectileRG = app.view.cannonBall.GetComponent<Rigidbody> ();
+		projectileRG.velocity = Vector3.zero;
+		projectileRG.useGravity = false;
+		app.view.cannonBall.transform.localPosition = new Vector3 (0, 1.345f, 1.87f);
+		app.view.cannonBall.transform.localRotation = new Quaternion (-0.1f, -0.7f, 0.1f, 0.7f);
+	}
+
 	public void reset(){
-		Destroy (projectile);
+		resetProjectile ();
 		app.view.results.gameObject.SetActive (false);
 		simulate = false;
 		app.view.startScreen.gameObject.SetActive (true);
@@ -127,22 +134,15 @@ public class ProjectileMotionController : ProjectileMotionElement{
 	}
 
 	public void fireProjectile(){
-		projectile = Instantiate (projectilePrefab) as GameObject;
 
 		float x = Mathf.Cos ((app.model.angle+10) * Mathf.Deg2Rad) * 2.4f;
 		float y = Mathf.Sin ((app.model.angle+10) * Mathf.Deg2Rad) * 2.4f;
 
-		projectile.transform.position = app.view.cannon.transform.position + new Vector3(x, y, 0);
-		projectile.transform.position = app.view.cannon.transform.position + new Vector3(2.05f, 0.85f, 0);
-//		projectile.transform.rotation = app.view.cannon.transform.rotation;
-		projectile.transform.RotateAround (new Vector3 (app.view.cannon.transform.position.x, app.view.cannon.transform.position.y, app.view.cannon.transform.position.z)
-			, Vector3.forward, (app.model.angle + 10) - projectile.transform.eulerAngles.z);
-	
 
-		projectileRG = projectile.GetComponent<Rigidbody> ();
 		app.model.velocityX = Mathf.Cos ((app.model.angle+10) * Mathf.Deg2Rad) * app.model.velocity;
 		app.model.velocityY = Mathf.Sin ((app.model.angle+10) * Mathf.Deg2Rad) * app.model.velocity;
 		projectileRG.velocity = new Vector3(app.model.velocityX, app.model.velocityY,0);
+		projectileRG.useGravity = true;
 
 		app.view.playScreen.angleText.text = (app.model.angle + 10) + "deg";
 		app.view.playScreen.velocityXText.text = string.Format("{0:0.00}", app.model.velocityX) + " m / s";
