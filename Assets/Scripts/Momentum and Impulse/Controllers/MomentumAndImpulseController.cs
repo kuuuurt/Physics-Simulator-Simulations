@@ -7,6 +7,10 @@ public class MomentumAndImpulseController : MomentumAndImpulseElement{
 	bool simulate;
 	bool paused;
 	public bool finished;
+	Rigidbody rg;
+	Vector3 previousVelocity;
+	public AudioSource sfx1;
+	public AudioSource sfx2;
 
 	void Start(){
 		startTutorial ();
@@ -20,6 +24,11 @@ public class MomentumAndImpulseController : MomentumAndImpulseElement{
 
 					app.view.results.momentumText.text = string.Format ("{0:0.00}", app.model.momentum) + " Ns";
 					app.view.results.impulseText.text = string.Format ("{0:0.00}", app.model.impulse) + " Ns";
+
+					rg.velocity = Vector3.zero;
+					finished = false;
+					app.view.playScreen.buttonStop.interactable = false;
+					app.view.playScreen.buttonPause.interactable = false;
 				}
 //				if (app.model.time < 2f) {
 //					app.model.time = (Time.time - startTime) + previousTime;
@@ -69,29 +78,42 @@ public class MomentumAndImpulseController : MomentumAndImpulseElement{
 		app.view.startScreen.gameObject.SetActive (true);
 		app.view.playScreen.gameObject.SetActive (false);
 		app.view.results.gameObject.SetActive (false);
+		rg = app.view.ball.GetComponent<Rigidbody> ();
+		rg.velocity = Vector3.zero;
 
+		app.view.ball.GetComponent<MomentumAndImpulseBallCollisionListener> ().collisionStarted = false;
+
+		app.view.ball.transform.localPosition = new Vector3 (-3.376f, 1.1f, 0);
+		app.view.catcher.transform.localPosition = new Vector3 (4, -0.9f, 0);
 	}
 
 	public void startSimulation(){
 		stopTutorial ();
 		app.model.mass = app.view.startScreen.massSlider.value;
 		app.model.velocity = app.view.startScreen.velocitySlider.value;
-		app.view.ball.GetComponent<Rigidbody> ().AddForce (app.model.velocity, 0, 0, ForceMode.Impulse);
-		app.view.ball.GetComponent<Rigidbody> ().mass = app.model.mass;
+		rg.AddForce (app.model.velocity, 0, 0, ForceMode.Impulse);
+		rg.mass = app.model.mass;
 		app.model.momentum = app.model.mass * app.model.velocity;
 		app.model.impulse = -app.model.momentum;
 		simulate = true;
 		app.view.startScreen.gameObject.SetActive (false);
 		app.view.playScreen.gameObject.SetActive (true);
+		app.view.playScreen.buttonStop.interactable = true;
+		app.view.playScreen.buttonPause.interactable = true;
+
+		app.controller.sfx1.Play ();
 	}
 
 	public void pauseResume(){
 		if (!paused) {
 			app.view.playScreen.buttonPause.GetComponentInChildren<Text> ().text = "Resume";
 			paused = true;
+			previousVelocity = rg.velocity;
+			rg.velocity = Vector3.zero;
 		} else {
 			app.view.playScreen.buttonPause.GetComponentInChildren<Text> ().text = "Pause";
 			paused = false;
+			rg.velocity = previousVelocity;
 		}
 	}
 }

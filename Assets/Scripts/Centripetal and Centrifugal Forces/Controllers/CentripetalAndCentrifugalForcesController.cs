@@ -10,6 +10,8 @@ public class CentripetalAndCentrifugalForcesController : CentripetalAndCentrifug
 	float startTime;
 	float targetTime;
 	float previousTime;
+	public AudioSource sfx;
+
 
 	void Start(){
 		startTutorial ();
@@ -19,22 +21,21 @@ public class CentripetalAndCentrifugalForcesController : CentripetalAndCentrifug
 		if (simulate) {
 			if (!paused) {
 				app.model.time = (Time.time - startTime) + previousTime;
-				//app.view.HUD.timeText.text = string.Format ("{0:0.00}", app.model.time) + " s";
+				app.view.HUD.timeText.text = string.Format ("{0:0.00}", app.model.time) + " s";
 				if (app.model.time < targetTime) {
 					app.view.mgr.transform.RotateAround (app.view.mgr.transform.position, Vector3.up, app.model.angularVelocity * Time.deltaTime);
 				} else {
 					simulate = false;
 					finished = true;
+					app.view.playScreen.buttonStop.interactable = false;
+					app.view.playScreen.buttonPause.interactable = false;
 					app.view.results.gameObject.SetActive (true);
-					app.view.results.forceText.text = string.Format ("{0:0.00}", (app.model.mass * Math.Pow(app.model.tangentialVelocity, 2)) / app.model.radius) + " N";
-					app.view.results.timeText.text = string.Format ("{0:0.00}", targetTime) + " s";
-					app.view.results.radiusText.text = string.Format ("{0:0.00}", app.model.radius) + " m";
-					app.view.results.velocityText.text = string.Format ("{0:0.00}", app.model.tangentialVelocity) + " m/s";
-					app.view.results.massText.text = string.Format ("{0:0.00}", app.model.mass) + " kg";
-
+					app.model.centripetalForce = app.model.mass * Mathf.Pow(app.model.tangentialVelocity, 2) / app.model.radius;
+					app.model.centrifugalForce = -app.model.centripetalForce;
+					app.view.results.centripetalForceText.text = string.Format ("{0:0.00}", app.model.centripetalForce) + " N";
+					app.view.results.centrifugalForceText.text = string.Format ("{0:0.00}", app.model.centrifugalForce) + " N";
+					app.controller.sfx.Stop ();
 				}
-			} else {
-
 			}
 		} else {
 			if (!finished) {
@@ -83,7 +84,9 @@ public class CentripetalAndCentrifugalForcesController : CentripetalAndCentrifug
 		app.view.startScreen.gameObject.SetActive (true);
 		app.view.playScreen.gameObject.SetActive (false);
 		app.view.results.gameObject.SetActive (false);
-
+		app.view.HUD.timeText.text = "0.00 s";
+		if (app.controller.sfx.isPlaying)
+			app.controller.sfx.Stop ();
 	}
 
 	public void startSimulation(){
@@ -98,6 +101,15 @@ public class CentripetalAndCentrifugalForcesController : CentripetalAndCentrifug
 		startTime = Time.time;
 		app.view.startScreen.gameObject.SetActive (false);
 		app.view.playScreen.gameObject.SetActive (true);
+		app.view.playScreen.buttonStop.interactable = true;
+		app.view.playScreen.buttonPause.interactable = true;
+
+		app.controller.sfx.pitch = (app.model.tangentialVelocity / 40) * 4;
+		app.controller.sfx.Play ();
+
+		app.view.playScreen.mass.text = string.Format ("{0:0.00}", app.model.mass) + " kg";
+		app.view.playScreen.tangentialVelocity.text = string.Format ("{0:0.00}", app.model.tangentialVelocity) + " m/s";
+		app.view.playScreen.radius.text = string.Format ("{0:0.00}", app.model.radius) + " m";
 
 	}
 
@@ -106,11 +118,12 @@ public class CentripetalAndCentrifugalForcesController : CentripetalAndCentrifug
 			app.view.playScreen.buttonPause.GetComponentInChildren<Text> ().text = "Resume";
 			paused = true;
 			previousTime = app.model.time;
-
+			app.controller.sfx.Pause ();
 		} else {
 			app.view.playScreen.buttonPause.GetComponentInChildren<Text> ().text = "Pause";
 			paused = false;
 			startTime = Time.time;
+			app.controller.sfx.UnPause ();
 		}
 	}
 }

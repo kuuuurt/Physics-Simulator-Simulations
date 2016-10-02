@@ -9,21 +9,25 @@ public class UniformCircularMotionController : UniformCircularMotionElement{
 	bool paused;
 	float startTime, previousTime;
 	float targetTime;
+	public AudioSource sfx;
 
 	void Start(){
 		startTutorial ();
 		initComponents();
+		//app.controller.sfx.Play ();
 	}
 
 	void Update(){
 		if (simulate) {
 			if (!paused) {
 				app.model.time = (Time.time - startTime) + previousTime;
-				app.view.HUD.timeText.text = string.Format ("{0:0.00}", app.model.time) + " s";
+
 				if (app.model.time < targetTime) {
 					app.view.satellite.transform.RotateAround (app.view.earth.transform.position, Vector3.forward, app.model.angularVelocity * Time.deltaTime);
 				} else {
 					simulate = false;
+					app.view.playScreen.buttonStop.interactable = false;
+					app.view.playScreen.buttonPause.interactable = false;
 					app.view.results.gameObject.SetActive (true);
 					app.view.results.timeText.text = string.Format ("{0:0.00}", targetTime) + " s";
 					app.view.results.distanceText.text = string.Format ("{0:0.00}", app.model.distance) + " m";
@@ -42,6 +46,8 @@ public class UniformCircularMotionController : UniformCircularMotionElement{
 		simulate = false;
 		paused = false;
 		previousTime = 0;
+		app.model.time = 0;
+		app.model.distance = 0;
 		app.view.startScreen.gameObject.SetActive (true);
 		app.view.playScreen.gameObject.SetActive (false);
 		app.view.playScreen.buttonPause.GetComponentInChildren<Text> ().text = "Pause";
@@ -97,7 +103,7 @@ public class UniformCircularMotionController : UniformCircularMotionElement{
 	}
 		
 	public void startSimulation(){
-		
+		stopTutorial ();
 		app.model.tangentialVelocity = app.view.startScreen.velocitySlider.value;
 		float circumference = 2 * Mathf.PI * app.model.earthRadius;
 		targetTime = circumference / app.model.tangentialVelocity;
@@ -108,6 +114,8 @@ public class UniformCircularMotionController : UniformCircularMotionElement{
 		startTime = Time.time;
 		app.view.startScreen.gameObject.SetActive (false);
 		app.view.playScreen.gameObject.SetActive (true);
+		app.view.playScreen.buttonStop.interactable = true;
+		app.view.playScreen.buttonPause.interactable = true;
 	}
 }
 

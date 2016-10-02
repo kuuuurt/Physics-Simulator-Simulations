@@ -4,10 +4,8 @@ using System.Collections;
 
 public class CentripetalAndCentrifugalForcesResultsView : CentripetalAndCentrifugalForcesElement {
 
-	public Text timeText;
-	public Text radiusText;
-	public Text velocityText;
-	public Text massText;
-	public Text forceText;
+
+	public Text centripetalForceText;
+	public Text centrifugalForceText;
 
 }

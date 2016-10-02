@@ -84,6 +84,7 @@
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\ContrastComposite.shader" />
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset3.shader" />
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\FisheyeShader.shader" />
+     <None Include="Assets\Downloaded Assets\laxer tree pkg\README.txt" />
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Information\License.txt" />
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Apply.shader" />
      <None Include="Assets\Downloaded Assets\CRCV2_Free_Demo\Standard Assets\Effects\ImageEffects\Shaders\frag_ao.cginc" />

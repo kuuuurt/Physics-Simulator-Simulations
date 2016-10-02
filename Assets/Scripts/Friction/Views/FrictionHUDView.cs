@@ -11,4 +11,6 @@ public class FrictionHUDView : FrictionElement {
 	public Slider forceSlider;
 	public Slider frictionSlider;
 
+	public Text frictionForceText;
+
 }

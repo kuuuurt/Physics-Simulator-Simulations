@@ -3,7 +3,8 @@ using UnityEngine.UI;
 
 public class AccelerationStartScreenView : AccelerationElement{
 
-	public InputField targetDistance;
+	public Slider distanceSlider;
+	public Text distanceText;
 	public Button buttonStart;
 
 }

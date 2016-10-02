@@ -11,5 +11,8 @@ public class WorkPowerView : WorkPowerElement {
 	public GameObject cube;
 	public GameObject instructions;
 
-
+	void Update(){
+		app.view.HUD.timeText.text = string.Format ("{0:0.00}", app.model.time) + " s";
+		app.view.HUD.distanceText.text = string.Format ("{0:0.00}", app.model.displacement) + " m";
+	}
 }

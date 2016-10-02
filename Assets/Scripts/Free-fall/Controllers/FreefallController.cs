@@ -7,10 +7,11 @@ public class FreefallController : FreefallElement{
 	bool simulate;
 	bool tutorialOngoing;
 	bool paused;
-
+	bool finished;
 	float startTime;
 	float previousTime;
 	float previousVelocity;
+	public AudioSource sfx;
 
 	void Start(){
 		startTutorial ();
@@ -19,6 +20,7 @@ public class FreefallController : FreefallElement{
 	}
 
 	public void Update(){
+		
 		if (simulate) {
 			if (!paused) {
 				if (app.model.height > 0) {
@@ -27,6 +29,8 @@ public class FreefallController : FreefallElement{
 					app.model.time = (Time.time - startTime) + previousTime;
 
 				} else {
+					simulate = false;
+					finished = true;
 					app.view.playScreen.buttonStop.interactable = false;
 					app.view.playScreen.buttonPause.interactable = false;
 					app.view.results.gameObject.SetActive(true);
@@ -36,15 +40,22 @@ public class FreefallController : FreefallElement{
 
 					app.model.dontSetVelocity = true;
 					app.model.velocity = 0f;
+
+					app.controller.sfx.Play ();
+//					app.controller.sfx.Stop ();
 				}
 			}
 		} else {
-			app.model.velocity = app.view.startScreen.velocitySlider.value;
-			app.model.height = app.view.startScreen.heightSlider.value;
-			app.view.crate.transform.position = new Vector3 (0f, app.view.ground.transform.position.y + app.model.height, 0f);
-			
+			if (!finished) {
+				app.model.velocity = app.view.startScreen.velocitySlider.value;
+				app.model.height = app.view.startScreen.heightSlider.value;
+				app.view.crate.transform.position = new Vector3 (0f, app.view.ground.transform.position.y + app.model.height, 0f);
+				app.view.startScreen.heightSliderText.text = string.Format ("{0:0.00}", app.model.height) + " m";
+				app.view.startScreen.velocitySliderText.text = string.Format ("{0:0.00}", app.model.velocity) + " m/s";
+			}
 		}
 	}
+
 
 	public void initComponents(){
 		simulate = false;
@@ -94,6 +105,7 @@ public class FreefallController : FreefallElement{
 		app.view.playScreen.gameObject.SetActive (true);
 		app.view.playScreen.buttonStop.interactable = true;
 		app.view.playScreen.buttonPause.interactable = true;
+//		app.controller.sfx.Play ();
 	}
 
 	public void reset(){
@@ -104,9 +116,12 @@ public class FreefallController : FreefallElement{
 		app.model.time = 0f;
 		simulate = false;
 		paused = false;
+		finished = false;
 		app.view.playScreen.buttonPause.GetComponentInChildren<Text> ().text = "Pause";
 		app.view.startScreen.gameObject.SetActive (true);
 		app.view.playScreen.gameObject.SetActive (false);
+//		if (app.controller.sfx.isPlaying)
+//			app.controller.sfx.Stop ();
 	}
 
 	public void pauseResume(){
@@ -119,6 +134,7 @@ public class FreefallController : FreefallElement{
 			app.model.velocity = 0f;
 			app.view.crate.rigidBody.useGravity = false;
 			app.view.crate.rigidBody.velocity = new Vector3 (0, 0, 0);
+//			app.controller.sfx.Pause();
 		} else {
 			app.view.playScreen.buttonPause.GetComponentInChildren<Text> ().text = "Pause";
 			app.model.dontSetVelocity = false;
@@ -127,6 +143,7 @@ public class FreefallController : FreefallElement{
 			app.view.crate.rigidBody.velocity = new Vector3 (0, app.model.velocity, 0);
 			app.view.crate.rigidBody.useGravity = true;
 			startTime = Time.time;
+//			app.controller.sfx.UnPause();
 		}
 	}
 

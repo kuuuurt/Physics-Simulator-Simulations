@@ -16,6 +16,8 @@ public class ProjectileMotionController : ProjectileMotionElement{
 	float previousVelocityX;
 	float previousVelocityY;
 
+	public AudioSource sfx;
+
 
 	void Start(){
 		startTutorial ();
@@ -36,6 +38,9 @@ public class ProjectileMotionController : ProjectileMotionElement{
 
 					app.model.time = (Time.time - startTime) + previousTime;
 				} else {
+					projectileRG.velocity = Vector3.zero;
+					app.view.playScreen.buttonStop.interactable = false;
+					app.view.playScreen.buttonPause.interactable = false;
 					app.view.results.gameObject.SetActive (true);
 					app.view.results.timeText.text = string.Format ("{0:0.00}", app.model.time) + " s";
 					app.view.results.heightText.text = string.Format ("{0:0.00}", app.model.maxHeight) + " m";
@@ -46,7 +51,11 @@ public class ProjectileMotionController : ProjectileMotionElement{
 			}
 		} else {
 			app.model.angle = app.view.startScreen.angle.value;
+			app.model.velocity = app.view.startScreen.initialVelocity.value;
+			app.view.startScreen.angleText.text = string.Format ("{0:0.00}", app.model.angle + 10) + " deg";
+			app.view.startScreen.initialVelocityText.text = string.Format ("{0:0.00}", app.model.velocity) + " m/s";
 			app.view.cannonBall.transform.rotation = new Quaternion (0, 0, 0, 0.6f);
+
 		}
 	}
 
@@ -86,12 +95,16 @@ public class ProjectileMotionController : ProjectileMotionElement{
 		projectileRG.useGravity = false;
 		app.view.cannonBall.transform.localPosition = new Vector3 (0, 1.345f, 1.87f);
 		app.view.cannonBall.transform.localRotation = new Quaternion (-0.1f, -0.7f, 0.1f, 0.7f);
+		app.view.camera.transform.localRotation = new Quaternion (0, 0, 0, 0);
 	}
 
 	public void reset(){
 		resetProjectile ();
 		app.view.results.gameObject.SetActive (false);
 		simulate = false;
+		app.model.range = 0;
+		app.model.time = 0;
+		app.model.velocityY = 0;
 		app.view.startScreen.gameObject.SetActive (true);
 		app.view.playScreen.gameObject.SetActive (false);
 		app.view.playScreen.buttonPause.GetComponentInChildren<Text> ().text = "Pause";
@@ -123,6 +136,7 @@ public class ProjectileMotionController : ProjectileMotionElement{
 	}
 
 	public void startSimulation(){
+		stopTutorial ();
 		app.model.angle = app.view.startScreen.angle.value;
 		app.model.velocity = app.view.startScreen.initialVelocity.value;
 		simulate = true;
@@ -130,7 +144,9 @@ public class ProjectileMotionController : ProjectileMotionElement{
 		fireProjectile ();
 		app.view.startScreen.gameObject.SetActive (false);
 		app.view.playScreen.gameObject.SetActive (true);
-
+		app.view.playScreen.buttonStop.interactable = true;
+		app.view.playScreen.buttonPause.interactable = true;
+		app.controller.sfx.Play ();
 	}
 
 	public void fireProjectile(){
@@ -148,5 +164,7 @@ public class ProjectileMotionController : ProjectileMotionElement{
 		app.view.playScreen.velocityXText.text = string.Format("{0:0.00}", app.model.velocityX) + " m / s";
 	}
 }
+
+
 
 

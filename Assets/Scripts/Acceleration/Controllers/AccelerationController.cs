@@ -20,7 +20,7 @@ public class AccelerationController : AccelerationElement{
 	}
 
 	void Update(){
-		if (!tutorialOngoing) {
+		
 			if (simulate) {
 				if (app.model.distance < app.model.targetDistance) {
 					app.model.accelerationRate = app.view.HUD.accelerationSlider.value;
@@ -43,17 +43,19 @@ public class AccelerationController : AccelerationElement{
 				} else {
 					app.view.HUD.buttonStop.gameObject.SetActive (false);
 					app.view.HUD.buttonPause.gameObject.SetActive (false);
-					app.view.results.gameObject.SetActive(true);
-					app.view.results.accelerationText.text = string.Format("{0:0.00}", app.model.targetDistance / app.model.velocity) + " m / s2";
-					app.view.results.distanceText.text = string.Format("{0:0.00}", app.model.targetDistance) + " m";
-					app.view.results.timeText.text = string.Format("{0:0.00}", app.model.time) + " s";
+					app.view.results.gameObject.SetActive (true);
+					app.view.results.accelerationText.text = string.Format ("{0:0.00}", app.model.targetDistance / app.model.velocity) + " m / s2";
+					app.view.results.distanceText.text = string.Format ("{0:0.00}", app.model.targetDistance) + " m";
+					app.view.results.timeText.text = string.Format ("{0:0.00}", app.model.time) + " s";
 
 					app.model.dontSetVelocity = true;
 					app.model.velocity = 0f;
 					simulate = false;
 				}
+			} else {
+				app.model.targetDistance = app.view.startScreen.distanceSlider.value;
+				app.view.startScreen.distanceText.text = string.Format ("{0:0.00}", app.model.targetDistance) + " m";
 			}
-		}
 	}
 
 	public void pauseResume(){
@@ -82,7 +84,7 @@ public class AccelerationController : AccelerationElement{
 		simulate = false;
 		app.view.HUD.buttonStop.gameObject.SetActive (false);
 		app.view.HUD.buttonPause.gameObject.SetActive (false);
-		app.view.startScreen.targetDistance.text = "";
+		app.view.startScreen.distanceText.text = "0.00 m";
 		app.view.startScreen.gameObject.SetActive (true);
 		app.view.HUD.buttonPause.GetComponentInChildren<Text> ().text = "Pause";
 	}
@@ -107,7 +109,6 @@ public class AccelerationController : AccelerationElement{
 	public void startTutorial(){
 		reset ();
 		simulate = false;
-		tutorialOngoing = true;
 		app.model.velocity = 0;
 		int i = 1;
 		while (true) {
@@ -119,20 +120,7 @@ public class AccelerationController : AccelerationElement{
 		}
 		app.view.instructions.transform.GetChild (0).gameObject.SetActive(true);
 	}
-
-	public void validateTargetDistance(Button btnDone){
-		try{
-			app.model.targetDistance = float.Parse(app.view.startScreen.targetDistance.text);
-			if(tutorialOngoing){
-				btnDone.interactable = true;
-			}
-			app.view.startScreen.buttonStart.interactable = true;
-		} catch (Exception ex) {
-			btnDone.interactable = false;
-			app.view.startScreen.buttonStart.interactable = false;
-			//set error message
-		}
-	}
+		
 
 	public void stopTutorial(){
 		tutorialOngoing = false;

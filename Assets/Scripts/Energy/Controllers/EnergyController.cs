@@ -7,9 +7,9 @@ public class EnergyController : EnergyElement{
 	bool simulate;
 	bool paused;
 	bool finished;
-	float startTime;
-	float targetTime;
-	float previousTime;
+	Vector3 previousVelocity;
+	Rigidbody rg;
+	public AudioSource sfx;
 
 	void Start(){
 		startTutorial ();
@@ -18,21 +18,18 @@ public class EnergyController : EnergyElement{
 	void Update(){
 		if (simulate) {
 			if (!paused) {
-				if (app.model.time < 2f) {
-					app.model.time = (Time.time - startTime) + previousTime;
-				} else {
+				Debug.Log (rg.velocity);
+				if (rg.velocity.x <= 0) {
 					simulate = false;
-					finished = true;
 					app.view.results.gameObject.SetActive (true);
+					app.view.playScreen.buttonStop.interactable = false;
+					app.view.playScreen.buttonPause.interactable = false;
 					app.view.results.energy.text = string.Format ("{0:0.00}", (app.model.mass * Mathf.Pow(app.model.velocity, 2))/ 2) + " J";
-				
 				}
 			}
 		} else {
-			if (!finished) {
-				app.view.startScreen.massSliderText.text = string.Format ("{0:0.00}", app.view.startScreen.massSlider.value) + " kg";
-				app.view.startScreen.velocitySliderText.text = string.Format ("{0:0.00}", app.view.startScreen.velocitySlider.value) + " m/s";
-			}
+			app.view.startScreen.massSliderText.text = string.Format ("{0:0.00}", app.view.startScreen.massSlider.value) + " kg";
+			app.view.startScreen.velocitySliderText.text = string.Format ("{0:0.00}", app.view.startScreen.velocitySlider.value) + " m/s";
 		}
 	}
 
@@ -65,7 +62,10 @@ public class EnergyController : EnergyElement{
 		simulate = false;
 		paused = false;
 		finished = false;
-		previousTime = 0;
+		app.view.bullet.transform.localPosition = new Vector3 (1.845f, 1.94f, -4.975f);
+		rg = app.view.bullet.GetComponent<Rigidbody> ();
+		rg.velocity = Vector3.zero;
+		rg.useGravity = false;
 		app.view.startScreen.gameObject.SetActive (true);
 		app.view.playScreen.gameObject.SetActive (false);
 		app.view.results.gameObject.SetActive (false);
@@ -77,12 +77,19 @@ public class EnergyController : EnergyElement{
 		app.model.mass = app.view.startScreen.massSlider.value;
 		app.model.velocity = app.view.startScreen.velocitySlider.value;
 
-		app.view.bullet.GetComponent<Rigidbody> ().AddForce (app.model.velocity, 0, 0, ForceMode.VelocityChange);
-		app.view.bullet.GetComponent<Rigidbody> ().useGravity = true;
+		rg.velocity = new Vector3 (0.01f, 0, 0);
+		rg.AddForce (app.model.velocity, 0, 0, ForceMode.VelocityChange);
+		rg.useGravity = true;
 		simulate = true;
-		startTime = Time.time;
 		app.view.startScreen.gameObject.SetActive (false);
 		app.view.playScreen.gameObject.SetActive (true);
+		app.view.playScreen.buttonStop.interactable = true;
+		app.view.playScreen.buttonPause.interactable = true;
+
+		app.view.playScreen.Velocity.text = string.Format ("{0:0.00}", app.model.velocity) + " m/s";
+		app.view.playScreen.Mass.text = string.Format ("{0:0.00}", app.model.mass) + " kg";
+
+		app.controller.sfx.Play ();
 
 	}
 
@@ -90,12 +97,13 @@ public class EnergyController : EnergyElement{
 		if (!paused) {
 			app.view.playScreen.buttonPause.GetComponentInChildren<Text> ().text = "Resume";
 			paused = true;
-			previousTime = app.model.time;
+			previousVelocity = rg.velocity;
+			rg.velocity = Vector3.zero;
 
 		} else {
 			app.view.playScreen.buttonPause.GetComponentInChildren<Text> ().text = "Pause";
 			paused = false;
-			startTime = Time.time;
+			rg.velocity = previousVelocity;
 		}
 	}
 }

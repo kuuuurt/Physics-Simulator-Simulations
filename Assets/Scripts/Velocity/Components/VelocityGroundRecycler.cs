@@ -11,9 +11,10 @@ public class VelocityGroundRecycler : VelocityElement{
 	}
 
 	void Update(){
-		if (app.view.car.transform.position.z - positions[back].position.z > 70) {
+		if (app.view.car.transform.position.z - positions[back].position.z > 120) {
 			Vector3 position = positions [back].position;
 			positions [back].position = new Vector3 (position.x, position.y, position.z + 160);
+			back += 6;
 			if (back < positions.Length - 1)
 				back++;
 			else

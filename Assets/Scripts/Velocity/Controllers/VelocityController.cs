@@ -5,15 +5,26 @@ using System;
 
 public class VelocityController : VelocityElement{
 
+	public AudioSource engineSound;
+
+	float topSpeed;
 	private bool simulate;
 	private bool tutorialOngoing;
 	private float previousTime;
 
 	void Start(){
 		startTutorial ();
+		engineSound.Play ();
+		topSpeed = 40;
+	}
+
+	void changeEngineSound(){
+		float pitch = app.model.velocity / topSpeed;
+		engineSound.pitch = pitch;
 	}
 
 	void Update(){
+		changeEngineSound ();
 		if (!tutorialOngoing) {
 			if (simulate) {
 				if (app.model.distance < app.model.targetDistance) {
@@ -25,12 +36,15 @@ public class VelocityController : VelocityElement{
 					//show results here
 					app.view.HUD.buttonStop.gameObject.SetActive (false);
 					app.view.HUD.buttonPause.gameObject.SetActive (false);
-					app.view.results.gameObject.SetActive(true);
-					app.view.results.velocityText.text = string.Format("{0:0.00}", app.model.targetDistance / app.model.time) + " m / s";
-					app.view.results.distanceText.text = string.Format("{0:0.00}", app.model.targetDistance) + " m";
-					app.view.results.timeText.text = string.Format("{0:0.00}", app.model.time) + " s";
+					app.view.results.gameObject.SetActive (true);
+					app.view.results.velocityText.text = string.Format ("{0:0.00}", app.model.targetDistance / app.model.time) + " m / s";
+					app.view.results.distanceText.text = string.Format ("{0:0.00}", app.model.targetDistance) + " m";
+					app.view.results.timeText.text = string.Format ("{0:0.00}", app.model.time) + " s";
 					simulate = false;
 				}
+			} else {
+				app.model.targetDistance = app.view.startScreen.distanceSlider.value;
+				app.view.startScreen.distanceText.text = string.Format ("{0:0.00}", app.model.targetDistance) + " m";
 			}
 		}
 	}
@@ -57,7 +71,7 @@ public class VelocityController : VelocityElement{
 		app.view.HUD.buttonPause.GetComponentInChildren<Text> ().text = "Pause";
 		app.view.HUD.buttonStop.gameObject.SetActive (false);
 		app.view.HUD.buttonPause.gameObject.SetActive (false);
-		app.view.startScreen.targetDistance.text = "";
+		app.view.startScreen.distanceText.text = "";
 		app.view.startScreen.gameObject.SetActive (true);
 	}
 
@@ -65,10 +79,14 @@ public class VelocityController : VelocityElement{
 		simulate = true;
 		previousTime = 0;
 
+		app.model.targetDistance = app.view.startScreen.distanceSlider.value;
+
 		app.view.HUD.buttonStop.gameObject.SetActive (true);
 		app.view.HUD.buttonPause.gameObject.SetActive (true);
 		app.model.startPos = app.view.car.transform.position.z;
 		app.model.endPos = app.model.startPos + app.model.targetDistance;
+
+
 
 		app.view.HUD.distanceSlider.minValue = 0;
 		app.view.HUD.distanceSlider.maxValue = app.model.targetDistance;
@@ -93,20 +111,6 @@ public class VelocityController : VelocityElement{
 			}
 		}
 		app.view.instructions.transform.GetChild (0).gameObject.SetActive(true);
-	}
-
-	public void validateTargetDistance(Button btnDone){
-		try{
-			app.model.targetDistance = float.Parse(app.view.startScreen.targetDistance.text);
-			if(tutorialOngoing){
-				btnDone.interactable = true;
-			}
-			app.view.startScreen.buttonStart.interactable = true;
-		} catch (Exception ex) {
-			btnDone.interactable = false;
-			app.view.startScreen.buttonStart.interactable = false;
-			//set error message
-		}
 	}
 
 	public void stopTutorial(){

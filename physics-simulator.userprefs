@@ -1,21 +1,15 @@
 ﻿<Properties RefactoringSettings.EnableRefactorings="True" StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Projectile Motion\Controllers\ProjectileMotionController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Acceleration\Controllers\AccelerationController.cs">
     <Files>
-      <File FileName="Assets\Scripts\Velocity\Components\VelocityGroundRecycler.cs" Line="26" Column="1" />
-      <File FileName="Assets\Scripts\Projectile Motion\Controllers\ProjectileMotionController.cs" Line="49" Column="65" />
-      <File FileName="Assets\Scripts\Projectile Motion\Views\ProjectileMotionView.cs" Line="22" Column="1" />
-      <File FileName="Assets\Scripts\Projectile Motion\Components\ObjectRotator.cs" Line="30" Column="49" />
+      <File FileName="Assets\Scripts\Velocity\Controllers\VelocityController.cs" Line="31" Column="6" />
+      <File FileName="Assets\Scripts\Velocity\Views\VelocityStartScreenView.cs" Line="7" Column="27" />
+      <File FileName="Assets\Scripts\Acceleration\Controllers\AccelerationController.cs" Line="43" Column="13" />
+      <File FileName="Assets\Scripts\Acceleration\Views\AccelerationStartScreenView.cs" Line="7" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="E:\unity-apps\physics-simulator\Assets\Scripts\Momentum and Impulse\Components\MomentumAndImpulseCatcherCollisionListener.cs" line="19" column="1" />
-      <Breakpoint file="E:\unity-apps\physics-simulator\Assets\Scripts\Momentum and Impulse\Components\MomentumAndImpulseCatcherCollisionListener.cs" line="28" column="1" />
-      <Breakpoint file="E:\unity-apps\physics-simulator\Assets\Scripts\Momentum and Impulse\Components\MomentumAndImpulseBallCollisionListener.cs" line="19" column="1" />
-      <Breakpoint file="E:\unity-apps\physics-simulator\Assets\Scripts\Projectile Motion\Controllers\ProjectileMotionController.cs" line="28" column="1" />
-      <Breakpoint file="E:\unity-apps\physics-simulator\Assets\Scripts\Projectile Motion\Views\ProjectileMotionView.cs" line="22" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

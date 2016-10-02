@@ -4,9 +4,10 @@ using System.Collections;
 public class MomentumAndImpulseBallCollisionListener : MomentumAndImpulseElement {
 
 
-	bool collisionStarted;
+	public bool collisionStarted;
 	float startTime;
 	Collision collision;
+
 
 	void Start() {
 		collisionStarted = false;
@@ -17,12 +18,13 @@ public class MomentumAndImpulseBallCollisionListener : MomentumAndImpulseElement
 			app.model.time = Time.time - startTime;
 			if (collision.rigidbody.velocity == Vector3.zero) {
 				app.controller.finished = true;
+				collisionStarted = false;
 			}
 		}
 	}
 
 	void OnCollisionEnter(Collision collision){
-		
+		app.controller.sfx2.Play ();
 		startTime = Time.time;
 		this.collision = collision;
 		collisionStarted = true;

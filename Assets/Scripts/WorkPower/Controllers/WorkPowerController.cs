@@ -4,6 +4,9 @@ using System;
 
 public class WorkPowerController : WorkPowerElement{
 
+	//Audio Files
+	public AudioSource forceSound;
+
 	bool simulate;
 	bool tutorialOngoing;
 	bool paused;
@@ -12,6 +15,7 @@ public class WorkPowerController : WorkPowerElement{
 	float targetTime;
 	float startX;
 	Rigidbody rg;
+	public AudioSource sfx;
 
 	void Start(){
 		startTutorial ();
@@ -23,11 +27,13 @@ public class WorkPowerController : WorkPowerElement{
 			if (!paused) {
 				if (rg.velocity.x > 0) {
 					app.model.time = Mathf.Round(((Time.time - startTime) + previousTime) * 100) / 100;
-					app.model.displacement = app.view.cube.transform.position.x - startX;
+					app.model.displacement = Mathf.Round((app.view.cube.transform.position.x - startX) * 100) / 100;
 					app.view.HUD.timeText.text = string.Format ("{0:0.00}", app.model.time) + " s";
 					app.view.HUD.distanceText.text = string.Format ("{0:0.00}", app.model.displacement) + " s";
 				} else {
 					simulate = false;
+					app.view.playScreen.buttonStop.interactable = false;
+					app.view.playScreen.buttonPause.interactable = false;
 					app.view.results.gameObject.SetActive (true);
 					app.view.HUD.timeText.text = string.Format ("{0:0.00}", app.model.time) + " s";
 					app.view.HUD.distanceText.text = string.Format ("{0:0.00}", app.model.displacement) + " s";
@@ -40,6 +46,8 @@ public class WorkPowerController : WorkPowerElement{
 		} else {
 			app.view.cube.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 			app.view.cube.GetComponent<Rigidbody> ().angularVelocity = Vector3.zero;
+			app.model.force = app.view.startScreen.forceSlider.value;
+			app.view.startScreen.forceText.text = string.Format ("{0:0.00}", app.model.force) + " N";
 		}
 	}
 
@@ -50,10 +58,11 @@ public class WorkPowerController : WorkPowerElement{
 		simulate = false;
 		paused = false;
 		previousTime = 0;
+		app.model.displacement = 0;
+		app.model.time = 0;
 		app.view.startScreen.gameObject.SetActive (true);
 		app.view.playScreen.gameObject.SetActive (false);
 		app.view.playScreen.buttonPause.GetComponentInChildren<Text> ().text = "Pause";
-
 	}
 
 	public void pauseResume(){
@@ -109,8 +118,7 @@ public class WorkPowerController : WorkPowerElement{
 	public void startSimulation(){
 		stopTutorial ();
 		app.model.force = app.view.startScreen.forceSlider.value;
-		app.model.angle = 45;
-		app.model.force = app.model.force * Mathf.Cos (45 * Mathf.Deg2Rad);
+
 		rg = app.view.cube.GetComponent<Rigidbody> ();
 		rg.velocity = new Vector3 (0.01f, 0, 0);
 		rg.AddForce (app.model.force,0,0,ForceMode.VelocityChange);
@@ -121,6 +129,10 @@ public class WorkPowerController : WorkPowerElement{
 		app.view.playScreen.force.text = string.Format ("{0:0.00}", app.model.force) + " N";
 		app.view.startScreen.gameObject.SetActive (false);
 		app.view.playScreen.gameObject.SetActive (true);
+		app.view.playScreen.buttonStop.interactable = true;
+		app.view.playScreen.buttonPause.interactable = true;
+
+		app.controller.forceSound.Play ();
 
 		simulate = true;
 	}

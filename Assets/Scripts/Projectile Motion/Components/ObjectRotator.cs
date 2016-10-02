@@ -13,6 +13,7 @@ public class ObjectRotator : ProjectileMotionElement {
 	public float yOffset;
 	public float zOffset;
 
+
 	public bool rotateZ, rotateX, rotateY;
 
 	void FixedUpdate()

@@ -8,5 +8,7 @@ public class CentripetalAndCentrifugalForcesModel : CentripetalAndCentrifugalFor
 	public float time;
 	public float mass;
 	public float radius;
+	public float centripetalForce;
+	public float centrifugalForce;
 
 }

@@ -13,4 +13,8 @@ public class UniformCircularMotionView : UniformCircularMotionElement {
 
 	public GameObject instructions;
 
+	void Update(){
+		app.view.HUD.timeText.text = string.Format ("{0:0.00}", app.model.time) + " s";
+		app.view.HUD.distanceText.text = string.Format ("{0:0.00}", app.model.time * app.model.tangentialVelocity) + " m";
+	}
 }
