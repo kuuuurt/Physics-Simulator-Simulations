@@ -14,48 +14,51 @@ public class AccelerationController : AccelerationElement{
 	bool accelerate;
 	bool brake;
 
+	public AudioSource engineSound;
 
 	void Start(){
 		startTutorial ();
+		engineSound.Play ();
+
 	}
 
 	void Update(){
-		
-			if (simulate) {
-				if (app.model.distance < app.model.targetDistance) {
-					app.model.accelerationRate = app.view.HUD.accelerationSlider.value;
-					app.model.brakeRate = app.view.HUD.brakeSlider.value;
-					app.model.distance = app.view.car.transform.position.z - app.model.startPos;
-					app.model.time = (Time.time - app.model.startTime) + previousTime;
-					if (accelerate) {
-						app.model.velocity += Time.deltaTime * app.model.accelerationRate;
-						if (app.model.velocity > app.model.maxSpeed) {
-							app.model.velocity = app.model.maxSpeed;
-							accelerate = false;
-						}
-					} else if (brake) {
-						app.model.velocity -= Time.deltaTime * app.model.brakeRate;
-						if (app.model.velocity < 0) {
-							app.model.velocity = 0;
-							brake = false;
-						}
+		changeEngineSound ();
+		if (simulate) {
+			if (app.model.distance < app.model.targetDistance) {
+				app.model.accelerationRate = app.view.HUD.accelerationSlider.value;
+				app.model.brakeRate = app.view.HUD.brakeSlider.value;
+				app.model.distance = app.view.car.transform.position.z - app.model.startPos;
+				app.model.time = (Time.time - app.model.startTime) + previousTime;
+				if (accelerate) {
+					app.model.velocity += Time.deltaTime * app.model.accelerationRate;
+					if (app.model.velocity > app.model.maxSpeed) {
+						app.model.velocity = app.model.maxSpeed;
+						accelerate = false;
 					}
-				} else {
-					app.view.HUD.buttonStop.gameObject.SetActive (false);
-					app.view.HUD.buttonPause.gameObject.SetActive (false);
-					app.view.results.gameObject.SetActive (true);
-					app.view.results.accelerationText.text = string.Format ("{0:0.00}", app.model.targetDistance / app.model.velocity) + " m / s2";
-					app.view.results.distanceText.text = string.Format ("{0:0.00}", app.model.targetDistance) + " m";
-					app.view.results.timeText.text = string.Format ("{0:0.00}", app.model.time) + " s";
-
-					app.model.dontSetVelocity = true;
-					app.model.velocity = 0f;
-					simulate = false;
+				} else if (brake) {
+					app.model.velocity -= Time.deltaTime * app.model.brakeRate;
+					if (app.model.velocity < 0) {
+						app.model.velocity = 0;
+						brake = false;
+					}
 				}
 			} else {
-				app.model.targetDistance = app.view.startScreen.distanceSlider.value;
-				app.view.startScreen.distanceText.text = string.Format ("{0:0.00}", app.model.targetDistance) + " m";
+				app.view.HUD.buttonStop.gameObject.SetActive (false);
+				app.view.HUD.buttonPause.gameObject.SetActive (false);
+				app.view.results.gameObject.SetActive (true);
+				app.view.results.accelerationText.text = string.Format ("{0:0.00}", app.model.targetDistance / app.model.velocity) + " m / s2";
+				app.view.results.distanceText.text = string.Format ("{0:0.00}", app.model.targetDistance) + " m";
+				app.view.results.timeText.text = string.Format ("{0:0.00}", app.model.time) + " s";
+
+				app.model.dontSetVelocity = true;
+				app.model.velocity = 0f;
+				simulate = false;
 			}
+		} else {
+			app.model.targetDistance = app.view.startScreen.distanceSlider.value;
+			app.view.startScreen.distanceText.text = string.Format ("{0:0.00}", app.model.targetDistance) + " m";
+		}
 	}
 
 	public void pauseResume(){
@@ -73,6 +76,11 @@ public class AccelerationController : AccelerationElement{
 			app.model.velocity = previousVelocity;
 			app.model.startTime = Time.time;
 		}
+	}
+
+	void changeEngineSound(){
+		float pitch = app.model.velocity / 40;
+		engineSound.pitch = pitch + 0.5f;
 	}
 
 	public void reset(){

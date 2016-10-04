@@ -20,7 +20,7 @@ public class VelocityController : VelocityElement{
 
 	void changeEngineSound(){
 		float pitch = app.model.velocity / topSpeed;
-		engineSound.pitch = pitch;
+		engineSound.pitch = pitch + 0.5f;
 	}
 
 	void Update(){
